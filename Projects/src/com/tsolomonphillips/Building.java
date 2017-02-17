@@ -19,6 +19,14 @@ public class Building implements Facility
         this.buildingRate = buildingRate;
     }
 
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
+    public void setBuildingRate(double buildingRate) {
+        this.buildingRate = buildingRate;
+    }
+
     @Override
     public Log listMaintenance()
     {
@@ -48,6 +56,8 @@ public class Building implements Facility
     {
         return 0;
     }
+
+
 
     @Override
     public void vacateFacility()

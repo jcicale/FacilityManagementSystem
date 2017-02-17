@@ -30,7 +30,7 @@ public class Maintenance
 
     public Facility listFacilityProblemes() // not sure about this method
     {
-        return Faciliy;
+        return null;
     }
 
     public double calcDownTimeForFacility()
@@ -40,27 +40,27 @@ public class Maintenance
 
     public Log getLog()
     {
-        return Log;
+        return null;
     }
 
     public Schedule getSchedule()
     {
-        return Schedule;
+        return null;
     }
 
     public MaintenanceRequest getMaintenanceRequest()
     {
-        return MaintenanceRequest;
+        return null;
     }
 
     public MaintenanceOrder getMaintenanceOrder()
     {
-        return MaintenanceOrder;
+        return null;
     }
 
     public Inspection getInspection()
     {
-        return Inspection;
+        return null;
     }
 
 }
