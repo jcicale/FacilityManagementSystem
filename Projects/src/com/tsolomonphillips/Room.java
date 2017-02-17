@@ -12,6 +12,23 @@ public class Room implements Facility
     private int capacity;
     private double monthlyPrice;
 
+    public Room(String roomNumber, int capacity, double monthlyPrice) {
+        this.roomNumber = roomNumber;
+        this.capacity = capacity;
+        this.monthlyPrice = monthlyPrice;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setMonthlyPrice(double monthlyPrice) {
+        this.monthlyPrice = monthlyPrice;
+    }
 
     @Override
     public Log listMaintenance()
