@@ -5,17 +5,21 @@ import sun.rmi.runtime.Log;
 
 import javax.xml.soap.Detail;
 import java.util.List;
+import java.util.Vector;
 
 public class Room implements Facility
 {
     private String roomNumber;
     private int capacity;
     private double monthlyPrice;
+    private List<Tenant> currentTenants;
 
     public Room(String roomNumber, int capacity, double monthlyPrice) {
         this.roomNumber = roomNumber;
         this.capacity = capacity;
         this.monthlyPrice = monthlyPrice;
+        this.currentTenants = new Vector<>(capacity);
+        System.out.println("A new room has been constructed with a room number of " + roomNumber + ", a capacity of " + capacity + ", and a monthly price of " + monthlyPrice + ".");
     }
 
     public void setRoomNumber(String roomNumber) {
@@ -28,6 +32,13 @@ public class Room implements Facility
 
     public void setMonthlyPrice(double monthlyPrice) {
         this.monthlyPrice = monthlyPrice;
+    }
+
+    public void setCurrentTenant(Tenant tenant) {
+        if (currentTenants.size() < capacity) {
+            this.currentTenants.add(tenant);
+        }
+        else System.out.println("This room is full. One or more tenants must be removed before another can be added.");
     }
 
     @Override
@@ -61,21 +72,23 @@ public class Room implements Facility
     }
 
     @Override
-    public void vacateFacility()
-    {
-
+    public void vacateFacility() {
+        for (int i = 0; i < currentTenants.size(); i++) {
+            currentTenants.remove(i);
+        }
+        System.out.println("All tenants have been removed from Room " + roomNumber);
     }
 
     @Override
-    public boolean isInUseDuringInternval()
+    public boolean isInUseDuringInterval()
     {
         return false;
     }
 
     @Override
-    public void assignFacilityToUse()
-    {
-
+    public void assignFacilityToUse(Tenant tenant) {
+        this.currentTenants.add(tenant);
+        System.out.println("A new tenant has been added to Room " + roomNumber);
     }
 
     @Override

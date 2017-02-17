@@ -17,6 +17,7 @@ public class Building implements Facility
     {
         this.buildingName = buildingName;
         this.buildingRate = buildingRate;
+        System.out.println("A new building called " + buildingName + " has been constructed with a rate of " + buildingRate + ".");
     }
 
     public void setBuildingName(String buildingName) {
@@ -62,7 +63,10 @@ public class Building implements Facility
     @Override
     public void vacateFacility()
     {
-
+        for (int i = 0; i < roomList.size(); i ++) {
+            roomList.elementAt(i).vacateFacility();
+        }
+        System.out.println("All tenants removed from Facility " + buildingName);
     }
 
     @Override
