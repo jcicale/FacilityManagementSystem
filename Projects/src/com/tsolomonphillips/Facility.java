@@ -13,11 +13,10 @@ public interface Facility
     Log listMaintenance();
     List<MaintenanceRequest> listMaintRequests();
     List<Facility> listFacilities();
-    Detail getFacilityInformation();
+    void getFacilityInformation(); //need to decide about a detail class - would make this return easier
     int requestAvailableCapacity();
     void vacateFacility();
-    boolean isInUseDuringInternval();
-    void assignFacilityToUse();
+    boolean isInUseDuringInterval();
     List<Inspection> listInspections();
     double listActualUsage();
     double calcUsageRate();
