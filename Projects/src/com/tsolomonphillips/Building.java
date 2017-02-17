@@ -1,8 +1,10 @@
 package com.tsolomonphillips;
 
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import sun.rmi.runtime.Log;
 
+import javax.sound.midi.Soundbank;
 import javax.xml.soap.Detail;
 import java.util.List;
 import java.util.Vector;
@@ -47,9 +49,11 @@ public class Building implements Facility
     }
 
     @Override
-    public Detail getFacilityInformation()
-    {
-        return null;
+    public void getFacilityInformation() {
+        System.out.println("Facility detail: ");
+        System.out.println("This facility is called " + this.buildingName);
+        System.out.println("This facility's rate is " + this.buildingRate);
+        System.out.println("There are " + this.roomList.size() + " rooms in this facility.");
     }
 
     @Override
@@ -70,16 +74,11 @@ public class Building implements Facility
     }
 
     @Override
-    public boolean isInUseDuringInternval()
+    public boolean isInUseDuringInterval()
     {
         return false;
     }
 
-    @Override
-    public void assignFacilityToUse()
-    {
-
-    }
 
     @Override
     public List<Inspection> listInspections()

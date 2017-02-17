@@ -41,6 +41,11 @@ public class Room implements Facility
         else System.out.println("This room is full. One or more tenants must be removed before another can be added.");
     }
 
+    public void assignFacilityToUse(Tenant tenant) {
+        this.currentTenants.add(tenant);
+        System.out.println("A new tenant has been added to Room " + roomNumber);
+    }
+
     @Override
     public Log listMaintenance()
     {
@@ -60,9 +65,14 @@ public class Room implements Facility
     }
 
     @Override
-    public Detail getFacilityInformation()
+    public void getFacilityInformation()
     {
-        return null;
+        System.out.println("Facility detail: ");
+        System.out.println("This facility is a room. The number is " + this.roomNumber);
+        System.out.println("This facility's capacity is " + this.capacity);
+        System.out.println("The monthly price for this facility is " + this.monthlyPrice);
+        System.out.println("There are currently " + this.currentTenants.size() + " using this room.");
+
     }
 
     @Override
@@ -85,11 +95,6 @@ public class Room implements Facility
         return false;
     }
 
-    @Override
-    public void assignFacilityToUse(Tenant tenant) {
-        this.currentTenants.add(tenant);
-        System.out.println("A new tenant has been added to Room " + roomNumber);
-    }
 
     @Override
     public List<Inspection> listInspections()
