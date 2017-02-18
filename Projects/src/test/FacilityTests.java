@@ -91,4 +91,10 @@ public class FacilityTests {
         assertEquals(1.0/3.0, buildingOne.getAdministrator().getOccupiedPercentage(), .001);
         assertEquals(1, buildingOne.getAdministrator().getNumberOfTenants());
     }
+
+    @Test
+    public void inspectionTest() {
+        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
+
+    }
 }

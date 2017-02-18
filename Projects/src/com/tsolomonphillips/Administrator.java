@@ -1,18 +1,34 @@
 package com.tsolomonphillips;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 /**
  * Created by juliacicale1 on 2/16/17.
  */
 public class Administrator implements IAdministrator {
     private IFacility facility;
+    private List<IInspection> inspectionList = new ArrayList<>();
 
     public Administrator(IFacility facility) {
         this.facility = facility;
     }
 
     @Override
-    public List<Inspection> listInspections() {
-        return null;
+    public List<IInspection> listInspections() {
+        List<IInspection> allInspections = new ArrayList<>();
+        allInspections.addAll(inspectionList);
+        for (IFacility facility : facility.getFacilityList()) {
+            allInspections.addAll(facility.getAdministrator().listInspections());
+        }
+        return allInspections;
+    }
+
+    @Override
+    public void performInspection() {
+        IInspection inspection = new Inspection(UUID.randomUUID().toString(), new Date(), this.facility);
+        inspectionList.add(inspection);
     }
 
     @Override
