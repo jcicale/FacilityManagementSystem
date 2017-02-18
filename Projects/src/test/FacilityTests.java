@@ -95,6 +95,14 @@ public class FacilityTests {
     @Test
     public void inspectionTest() {
         IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
-
+        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
+        IFacility roomTwo = new Facility("Room Two", FacilityType.ROOM, 1, 900);
+        buildingOne.addFacility(roomOne);
+        buildingOne.addFacility(roomTwo);
+        roomOne.getAdministrator().performInspection();
+        roomTwo.getAdministrator().performInspection();
+        assertEquals(2, buildingOne.getAdministrator().listInspections().size());
+        assertEquals(1, roomOne.getAdministrator().listInspections().size());
+        assertEquals(1, roomTwo.getAdministrator().listInspections().size());
     }
 }

@@ -1,15 +1,10 @@
 package com.tsolomonphillips;
 
-
-import sun.rmi.runtime.Log;
-
-import javax.xml.soap.Detail;
 import java.util.ArrayList;
 import java.util.List;
 
 //public interface Facility
 //{
-//    Administrator administrator = new Administrator();
 //    Maintenance maintenance = new Maintenance();
 //    Log listMaintenance();
 //    List<MaintenanceRequest> listMaintRequests();
@@ -123,3 +118,4 @@ public class Facility implements IFacility, IFacilityDetail {
         return type;
     }
 }
+
