@@ -5,7 +5,10 @@ package com.tsolomonphillips;
  */
 public class Tenant {
     private String name;
-    private String roomNumber;
+
+    public Tenant(String name) {
+        this.name = name;
+    }
 
     public MaintenanceRequest makeMaintenanceRequest(String problemType, String dateRequested, boolean isCompleted, String idNumber) {
         MaintenanceRequest newRequest = new MaintenanceRequest(problemType, dateRequested, isCompleted, idNumber);

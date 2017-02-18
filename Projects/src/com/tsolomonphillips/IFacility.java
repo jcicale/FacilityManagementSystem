@@ -16,4 +16,6 @@ public interface IFacility {
     boolean addTenant(Tenant tenant);
     void removeTenant(Tenant tenant);
     List<Tenant> getTenants(); //listActualUsage method
+
+    IAdministrator getAdministrator();
 }

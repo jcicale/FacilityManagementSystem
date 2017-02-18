@@ -25,12 +25,14 @@ public class Facility implements IFacility, IFacilityDetail {
     private FacilityType type;
     private int baseCapacity;
     private double baseRate;
+    private IAdministrator administrator;
 
     public Facility(String name, FacilityType type, int baseCapacity, double baseRate) {
         this.name = name;
         this.type = type;
         this.baseCapacity = baseCapacity;
         this.baseRate = baseRate;
+        this.administrator = new Administrator(this);
     }
 
     @Override
@@ -55,6 +57,7 @@ public class Facility implements IFacility, IFacilityDetail {
 
     @Override
     public void vacateFacility() {
+        facilityTenants.clear();
         for (IFacility facility : subFacilities) {
             facility.vacateFacility();
         }
@@ -82,6 +85,11 @@ public class Facility implements IFacility, IFacilityDetail {
             allTenants.addAll(facility.getTenants());
         }
         return  allTenants;
+    }
+
+    @Override
+    public IAdministrator getAdministrator() {
+        return administrator;
     }
 
     /**
