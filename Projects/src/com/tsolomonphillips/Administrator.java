@@ -1,24 +1,54 @@
 package com.tsolomonphillips;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Created by juliacicale1 on 2/16/17.
  */
-public class Administrator {
-    private Vector<Inspection> inspectionList = new Vector<Inspection>();
-    public Administrator() {
+public class Administrator implements IAdministrator {
+    private IFacility facility;
+    private List<IInspection> inspectionList = new ArrayList<>();
+
+    public Administrator(IFacility facility) {
+        this.facility = facility;
     }
-    public double calculateUsage() {
-        return 0;
+
+    @Override
+    public List<IInspection> listInspections() {
+        List<IInspection> allInspections = new ArrayList<>();
+        allInspections.addAll(inspectionList);
+        for (IFacility facility : facility.getFacilityList()) {
+            allInspections.addAll(facility.getAdministrator().listInspections());
+        }
+        return allInspections;
     }
-    public Vector<Inspection> listInspections() {
+
+    @Override
+    public void performInspection() {
+        IInspection inspection = new Inspection(UUID.randomUUID().toString(), new Date(), this.facility);
+        inspectionList.add(inspection);
+    }
+
+    @Override
+    public String listFacilityProblems() {
         return null;
     }
-    public void addBuilding(String buildingName, double buildingRate) {
-        Building buildingToAdd = new Building(buildingName, buildingRate);
-        //add to list?
-    }
-    public void addRoom(String roomNumber, int roomCapacity, double monthlyPrice) {
 
+    @Override
+    public float getOccupiedPercentage() {
+        if (facility.getFacilityInformation().getCapacity() == 0) return 1;
+        return (float)facility.getTenants().size()/(float)facility.getFacilityInformation().getCapacity();
     }
 
+    @Override
+    public int getAvailableCapacity() {
+        return facility.getFacilityInformation().getCapacity() - facility.getTenants().size();
+    }
+
+    @Override
+    public int getNumberOfTenants() {
+        return facility.getTenants().size();
+    }
 }
