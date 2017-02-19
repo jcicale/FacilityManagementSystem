@@ -1,66 +1,103 @@
 package com.tsolomonphillips;
 
 
-import sun.rmi.runtime.Log;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Maintenance
+public class Maintenance implements IMaintenance
 {
     private String dateRequested;
-    private String name; //not sure if we need a name here
     private Schedule schedule;
     private MaintenanceOrder maintenanceOrder;
     private MaintenanceRequest maintenanceRequest;
     private Inspection inspection;
-    private Log log;
+    private MaintenanceLog log;
 
-    public void scheduleMaintenance()
+    private IFacility facility;
+    private List<MaintenanceRequest> maintenanceRequestList = new ArrayList<>();
+
+    public Maintenance(IFacility facility)
     {
-
+        this.facility = facility;
     }
 
-    public double calcMaintenanceCostForFacility()
+
+    @Override
+    public void makeFacilityMaintRequest(String problemType, String dateCreated, String idNumber)
     {
-        return 0.0;
+        MaintenanceRequest maintenanceRequest = new MaintenanceRequest(problemType, dateCreated, idNumber);
+        maintenanceRequestList.add(maintenanceRequest);
     }
 
+    @Override
+    public List<MaintenanceRequest> maintenanceRequests(IFacility facility)
+    {
+        if(maintenanceRequest.isCompleted() == false)
+        {
+            return maintenanceRequestList;
+        }
+
+        return null;
+    }
+
+    @Override
+    public Schedule scheduleMaintenance(String dateScheduled)
+    {
+
+        return new Schedule(dateScheduled);
+    }
+
+    @Override
+    public double calcMaintCostForFacility()
+    {
+        return 0;
+    }
+
+    @Override
     public double calcProblemRateForFacility()
     {
-        return 0.0;
+        return 0;
     }
 
-    public Facility listFacilityProblemes() // not sure about this method
+    @Override
+    public void listFacilityProblems()
     {
-        return null;
+
     }
 
+    @Override
     public double calcDownTimeForFacility()
     {
-        return 0.0;
+        return 0;
     }
 
-    public Log getLog()
+    @Override
+    public MaintenanceLog getLog()
     {
         return null;
     }
 
+    @Override
     public Schedule getSchedule()
     {
         return null;
     }
 
+    @Override
     public MaintenanceRequest getMaintenanceRequest()
     {
         return null;
     }
 
-    public MaintenanceOrder getMaintenanceOrder()
+    @Override
+    public MaintenanceOrder getMaintenaceOrder()
     {
         return null;
     }
 
+    @Override
     public Inspection getInspection()
     {
         return null;
     }
-
 }
