@@ -3,16 +3,18 @@ package com.tsolomonphillips;
 /**
  * Created by juliacicale1 on 2/16/17.
  */
-public class MaintenanceRequest {
+public class MaintenanceRequest
+{
     private String problemType;
-    private String dateRequested;
+    private String dateCreated;
     private boolean isCompleted;
     private String idNumber;
 
-    public MaintenanceRequest(String problemType, String dateRequested, boolean isCompleted, String idNumber) {
+    public MaintenanceRequest(String problemType, String dateCreated, String idNumber)
+    {
         this.problemType = problemType;
-        this.dateRequested = dateRequested;
-        this.isCompleted = isCompleted;
+        this.dateCreated = dateCreated;
+        this.isCompleted = false;
         this.idNumber = idNumber;
     }
 
@@ -21,7 +23,7 @@ public class MaintenanceRequest {
     }
 
     public String getDateRequested() {
-        return dateRequested;
+        return dateCreated;
     }
 
     public boolean isCompleted() {
@@ -37,7 +39,7 @@ public class MaintenanceRequest {
     }
 
     public void setDateRequested(String dateRequested) {
-        this.dateRequested = dateRequested;
+        this.dateCreated = dateRequested;
     }
 
     public void setCompleted(boolean completed) {
