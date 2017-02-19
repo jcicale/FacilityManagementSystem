@@ -1,28 +1,32 @@
 package com.tsolomonphillips;
 
+import java.util.Date;
+
 /**
  * Created by juliacicale1 on 2/16/17.
  */
 public class MaintenanceRequest
 {
-    private String problemType;
-    private String dateCreated;
+    private ProblemType problemType;
+    private Date dateCreated;
     private boolean isCompleted;
     private String idNumber;
+    private IFacility facility;
 
-    public MaintenanceRequest(String problemType, String dateCreated, String idNumber)
+    public MaintenanceRequest(ProblemType problemType, Date dateCreated, String idNumber, IFacility facility)
     {
         this.problemType = problemType;
         this.dateCreated = dateCreated;
         this.isCompleted = false;
         this.idNumber = idNumber;
+        this.facility = facility;
     }
 
-    public String getProblemType() {
+    public ProblemType getProblemType() {
         return problemType;
     }
 
-    public String getDateRequested() {
+    public Date getDateRequested() {
         return dateCreated;
     }
 
@@ -34,11 +38,11 @@ public class MaintenanceRequest
         return idNumber;
     }
 
-    public void setProblemType(String problemType) {
+    public void setProblemType(ProblemType problemType) {
         this.problemType = problemType;
     }
 
-    public void setDateRequested(String dateRequested) {
+    public void setDateRequested(Date dateRequested) {
         this.dateCreated = dateRequested;
     }
 

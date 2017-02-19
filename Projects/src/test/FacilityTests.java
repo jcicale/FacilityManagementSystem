@@ -49,6 +49,14 @@ public class FacilityTests {
     }
 
     @Test
+    public void removeTenantTest() {
+        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 1, 500);
+        Tenant tenantOne = new Tenant("Tenant One");
+        roomOne.removeTenant(tenantOne);
+        assertEquals(null, tenantOne.getTenantFacility());
+    }
+
+    @Test
     public void simpleVacateTest() {
         IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 500);
         Tenant tenantOne = new Tenant("Tenant One");
@@ -57,6 +65,8 @@ public class FacilityTests {
         roomOne.addTenant(tenantTwo);
         roomOne.vacateFacility();
         assertEquals(0, roomOne.getTenants().size());
+        assertEquals(null, tenantOne.getTenantFacility());
+        assertEquals(null, tenantTwo.getTenantFacility());
     }
 
     @Test

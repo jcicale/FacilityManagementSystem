@@ -2,49 +2,52 @@ package com.tsolomonphillips;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Maintenance implements IMaintenance
 {
-    private String dateRequested;
     private Schedule schedule;
-    private MaintenanceOrder maintenanceOrder;
-    private MaintenanceRequest maintenanceRequest;
-    private Inspection inspection;
     private MaintenanceLog log;
 
     private IFacility facility;
-    private List<MaintenanceRequest> maintenanceRequestList = new ArrayList<>();
+
+    private List<MaintenanceRequest> maintenanceRequestList;
+    private List<MaintenanceOrder> maintenanceOrderList;
 
     public Maintenance(IFacility facility)
     {
         this.facility = facility;
+        this.log = new MaintenanceLog();
+        this.schedule = new Schedule();
+        this. maintenanceRequestList = new ArrayList<>();
+        this.maintenanceOrderList = new ArrayList<>();
     }
 
 
     @Override
-    public void makeFacilityMaintRequest(String problemType, String dateCreated, String idNumber)
-    {
-        MaintenanceRequest maintenanceRequest = new MaintenanceRequest(problemType, dateCreated, idNumber);
-        maintenanceRequestList.add(maintenanceRequest);
+    public List<MaintenanceRequest> listMaintRequests() {
+        return this.log.getPendingMaintenance();
     }
 
     @Override
-    public List<MaintenanceRequest> maintenanceRequests(IFacility facility)
-    {
-        if(maintenanceRequest.isCompleted() == false)
-        {
-            return maintenanceRequestList;
-        }
-
-        return null;
+    public List<MaintenanceRequest> listMaintenance() {
+        return this.log.getCompletedMaintenance();
     }
 
     @Override
-    public Schedule scheduleMaintenance(String dateScheduled)
-    {
+    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request) {
+        return new MaintenanceOrder(request);
+    }
 
-        return new Schedule(dateScheduled);
+    @Override
+    public void scheduleMaintenance(MaintenanceOrder order) {
+
+    }
+
+    @Override
+    public void doMaintenance(MaintenanceRequest request) {
+
     }
 
     @Override
@@ -74,30 +77,14 @@ public class Maintenance implements IMaintenance
     @Override
     public MaintenanceLog getLog()
     {
-        return null;
+        return this.log;
     }
 
     @Override
     public Schedule getSchedule()
     {
-        return null;
+        return this.schedule;
     }
 
-    @Override
-    public MaintenanceRequest getMaintenanceRequest()
-    {
-        return null;
-    }
 
-    @Override
-    public MaintenanceOrder getMaintenaceOrder()
-    {
-        return null;
-    }
-
-    @Override
-    public Inspection getInspection()
-    {
-        return null;
-    }
 }

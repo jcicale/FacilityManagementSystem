@@ -54,6 +54,9 @@ public class Facility implements IFacility, IFacilityDetail {
 
     @Override
     public void vacateFacility() {
+        for (Tenant tenant : facilityTenants) {
+            tenant.removeTenantFromFacility();
+        }
         facilityTenants.clear();
         for (IFacility facility : subFacilities) {
             facility.vacateFacility();
@@ -64,6 +67,7 @@ public class Facility implements IFacility, IFacilityDetail {
     public boolean addTenant(Tenant tenant) {
         if (facilityTenants.size() < getFacilityInformation().getCapacity()) {
             facilityTenants.add(tenant);
+            tenant.setTenantFacility(this);
             return true;
         }
         return false;
@@ -72,6 +76,7 @@ public class Facility implements IFacility, IFacilityDetail {
     @Override
     public void removeTenant(Tenant tenant) {
         facilityTenants.remove(tenant);
+        tenant.removeTenantFromFacility();
     }
 
     @Override
