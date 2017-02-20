@@ -32,11 +32,6 @@ public class Administrator implements IAdministrator {
     }
 
     @Override
-    public String listFacilityProblems() {
-        return null;
-    }
-
-    @Override
     public float getOccupiedPercentage() {
         if (facility.getFacilityInformation().getCapacity() == 0) return 1;
         return (float)facility.getTenants().size()/(float)facility.getFacilityInformation().getCapacity();

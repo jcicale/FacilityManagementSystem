@@ -43,12 +43,5 @@ public class MaintenanceOrder {
         } else return 2;
     }
 
-    public Date getDateSubmitted() {
-        return dateSubmitted;
-    }
-
-    public void setDateSubmitted(Date dateSubmitted) {
-        this.dateSubmitted = dateSubmitted;
-    }
 
 }

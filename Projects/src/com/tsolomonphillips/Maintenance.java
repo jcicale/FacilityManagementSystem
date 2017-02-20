@@ -14,16 +14,12 @@ public class Maintenance implements IMaintenance
 
     private IFacility facility;
 
-    private List<MaintenanceRequest> maintenanceRequestList;
-    private List<MaintenanceOrder> maintenanceOrderList;
 
     public Maintenance(IFacility facility)
     {
         this.facility = facility;
         this.log = new MaintenanceLog();
         this.schedule = new Schedule();
-        this. maintenanceRequestList = new ArrayList<>();
-        this.maintenanceOrderList = new ArrayList<>();
     }
 
 
@@ -45,14 +41,13 @@ public class Maintenance implements IMaintenance
     @Override
     public void scheduleMaintenance(MaintenanceOrder order) {
         schedule.getMaintenanceOrders().add(order);
-        Date todayDate = new Date();
+        Date scheduledDate = new Date();
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(todayDate);
+        calendar.setTime(scheduledDate);
         calendar.add(Calendar.DATE, 2);
-        todayDate = calendar.getTime();
-        System.out.println(todayDate);
-        System.out.println("Hi");
-        schedule.getScheduledDates().add(todayDate);
+        scheduledDate = calendar.getTime();
+        schedule.getScheduledDates().add(scheduledDate);
+        schedule.getMap().put(order, scheduledDate);
     }
 
     @Override
@@ -92,11 +87,11 @@ public class Maintenance implements IMaintenance
     @Override
     public int calcDownTimeForFacility()
     {
-//        int downtime = 0;
-//        for (MaintenanceRequest request : schedule.) {
-//            request.get
-//        }
-        return 0;
+        int downtime = 0;
+        for (MaintenanceOrder order : schedule.getMaintenanceOrders()) {
+            downtime += order.getDowntime();
+        }
+        return downtime;
     }
 
     @Override

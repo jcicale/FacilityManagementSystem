@@ -31,29 +31,14 @@ public class MaintenanceRequest
         return dateCreated;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
     public String getIdNumber() {
         return idNumber;
     }
 
-    public void setProblemType(ProblemType problemType) {
-        this.problemType = problemType;
-    }
-
-
-    public void setDateRequested(Date dateRequested) {
-        this.dateCreated = dateRequested;
-    }
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
 
 }
