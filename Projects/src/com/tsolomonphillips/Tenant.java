@@ -1,17 +1,35 @@
 package com.tsolomonphillips;
 
+import java.util.Date;
+
 /**
  * Created by juliacicale1 on 2/17/17.
  */
 public class Tenant {
     private String name;
+    private IFacility facility;
 
     public Tenant(String name) {
         this.name = name;
+        facility = null;
     }
 
-    public MaintenanceRequest makeMaintenanceRequest(String problemType, String dateRequested, boolean isCompleted, String idNumber) {
-        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, dateRequested, isCompleted, idNumber);
+    public void setTenantFacility(IFacility facility) {
+        this.facility = facility;
+    }
+
+    public IFacility getTenantFacility() {
+        return this.facility;
+    }
+
+    public void removeTenantFromFacility() {
+        this.facility = null;
+    }
+
+    public MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType) {
+        Date date = new Date();
+        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, date, this.facility);
+        facility.getMaintenance().getLog().addToPendingMaintenance(newRequest);
         return newRequest;
     }
 }

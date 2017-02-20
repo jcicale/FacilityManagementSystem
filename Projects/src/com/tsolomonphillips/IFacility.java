@@ -18,4 +18,5 @@ public interface IFacility {
     List<Tenant> getTenants(); //listActualUsage method
 
     IAdministrator getAdministrator();
+    IMaintenance getMaintenance();
 }

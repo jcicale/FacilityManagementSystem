@@ -1,20 +1,32 @@
 package com.tsolomonphillips;
 
+import java.util.*;
+
 /**
  * Created by juliacicale1 on 2/16/17.
  */
 public class Schedule
 {
-    private String dateScheduled;
+    private List<MaintenanceOrder> maintenanceOrders;
+    private List<Date> scheduledDates;
+    private Map<MaintenanceOrder, Date> map;
 
-    public Schedule(String dateScheduled)
-    {
-        this.dateScheduled = dateScheduled;
+    public Schedule() {
+        maintenanceOrders = new ArrayList<>();
+        scheduledDates = new ArrayList<>();
+        map = new HashMap<>();
     }
 
-    public String scheduleMaintenance(String dateScheduled)
-    {
-        return dateScheduled;
+    public List<MaintenanceOrder> getMaintenanceOrders() {
+        return maintenanceOrders;
+    }
+
+    public List<Date> getScheduledDates() {
+        return scheduledDates;
+    }
+
+    public Map<MaintenanceOrder, Date> getMap() {
+        return map;
     }
 
 }

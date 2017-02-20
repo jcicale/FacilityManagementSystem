@@ -7,18 +7,19 @@ import java.util.List;
  */
 public interface IMaintenance
 {
-    List<MaintenanceRequest> maintenanceRequests(IFacility facility);
+    List<MaintenanceRequest> listMaintRequests();
+    List<MaintenanceRequest> listMaintenance();
 
-    void makeFacilityMaintRequest(String problemType, String dateCreated, String idNumber);
-    Schedule scheduleMaintenance(String dateScheduled);
-    double calcMaintCostForFacility();
-    double calcProblemRateForFacility();
-    void listFacilityProblems();
-    double calcDownTimeForFacility();
+    MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request);
+    void scheduleMaintenance(MaintenanceOrder order);
+    void doMaintenance(MaintenanceRequest request);
+
+    double calcMaintCostForFacility(MaintenanceOrder order);
+    int calcProblemRateForFacility();
+    List<ProblemType> listFacilityProblems();
+    int calcDownTimeForFacility();
 
     MaintenanceLog getLog();
     Schedule getSchedule();
-    MaintenanceRequest getMaintenanceRequest();
-    MaintenanceOrder getMaintenaceOrder();
-    Inspection getInspection();
+
 }

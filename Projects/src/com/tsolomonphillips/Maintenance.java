@@ -1,103 +1,107 @@
 package com.tsolomonphillips;
 
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Maintenance implements IMaintenance
 {
-    private String dateRequested;
     private Schedule schedule;
-    private MaintenanceOrder maintenanceOrder;
-    private MaintenanceRequest maintenanceRequest;
-    private Inspection inspection;
     private MaintenanceLog log;
 
     private IFacility facility;
-    private List<MaintenanceRequest> maintenanceRequestList = new ArrayList<>();
 
     public Maintenance(IFacility facility)
     {
         this.facility = facility;
+        this.log = new MaintenanceLog();
+        this.schedule = new Schedule();
     }
 
 
     @Override
-    public void makeFacilityMaintRequest(String problemType, String dateCreated, String idNumber)
-    {
-        MaintenanceRequest maintenanceRequest = new MaintenanceRequest(problemType, dateCreated, idNumber);
-        maintenanceRequestList.add(maintenanceRequest);
+    public List<MaintenanceRequest> listMaintRequests() {
+        return this.log.getPendingMaintenance();
     }
 
     @Override
-    public List<MaintenanceRequest> maintenanceRequests(IFacility facility)
-    {
-        if(maintenanceRequest.isCompleted() == false)
-        {
-            return maintenanceRequestList;
+    public List<MaintenanceRequest> listMaintenance() {
+        return this.log.getCompletedMaintenance();
+    }
+
+    @Override
+    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request) {
+        return new MaintenanceOrder(request);
+    }
+
+    @Override
+    public void scheduleMaintenance(MaintenanceOrder order) {
+        schedule.getMaintenanceOrders().add(order);
+        Date scheduledDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(scheduledDate);
+        calendar.add(Calendar.DATE, 2);
+        scheduledDate = calendar.getTime();
+        schedule.getScheduledDates().add(scheduledDate);
+        schedule.getMap().put(order, scheduledDate);
+    }
+
+    @Override
+    public void doMaintenance(MaintenanceRequest request) {
+        request.setCompleted(true);
+        for (MaintenanceRequest maintenanceRequest : log.getPendingMaintenance()) {
+            if (maintenanceRequest.getIdNumber().equalsIgnoreCase(request.getIdNumber())) {
+                log.getPendingMaintenance().remove(maintenanceRequest);
+                break;
+            }
         }
-
-        return null;
+        log.getCompletedMaintenance().add(request);
     }
 
     @Override
-    public Schedule scheduleMaintenance(String dateScheduled)
-    {
-
-        return new Schedule(dateScheduled);
+    public double calcMaintCostForFacility(MaintenanceOrder order) {
+        return order.getMaintenanceCost();
     }
 
     @Override
-    public double calcMaintCostForFacility()
-    {
-        return 0;
+    public int calcProblemRateForFacility() {
+        return log.getCompletedMaintenance().size();
     }
 
     @Override
-    public double calcProblemRateForFacility()
-    {
-        return 0;
+    public List<ProblemType> listFacilityProblems() {
+        List<ProblemType> problemList = new ArrayList<>();
+        for (MaintenanceRequest request : log.getCompletedMaintenance()) {
+            problemList.add(request.getProblemType());
+        }
+        for (MaintenanceRequest request : log.getPendingMaintenance()) {
+            problemList.add(request.getProblemType());
+        }
+        return problemList;
     }
 
     @Override
-    public void listFacilityProblems()
+    public int calcDownTimeForFacility()
     {
-
-    }
-
-    @Override
-    public double calcDownTimeForFacility()
-    {
-        return 0;
+        int downtime = 0;
+        for (MaintenanceOrder order : schedule.getMaintenanceOrders()) {
+            downtime += order.getDowntime();
+        }
+        return downtime;
     }
 
     @Override
     public MaintenanceLog getLog()
     {
-        return null;
+        return this.log;
     }
 
     @Override
     public Schedule getSchedule()
     {
-        return null;
+        return this.schedule;
     }
 
-    @Override
-    public MaintenanceRequest getMaintenanceRequest()
-    {
-        return null;
-    }
 
-    @Override
-    public MaintenanceOrder getMaintenaceOrder()
-    {
-        return null;
-    }
-
-    @Override
-    public Inspection getInspection()
-    {
-        return null;
-    }
 }

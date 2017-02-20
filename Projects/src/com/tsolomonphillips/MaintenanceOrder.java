@@ -1,26 +1,47 @@
 package com.tsolomonphillips;
 
+import java.util.Date;
+
 /**
  * Created by juliacicale1 on 2/16/17.
  */
-public class MaintenanceOrder
-{
-    private String dateSubmitted;
-    private String dateScheduled;
+public class MaintenanceOrder {
+    private Date dateSubmitted;
+    private double maintenanceCost;
+    private int downTime;
+    private MaintenanceRequest maintenanceRequest;
 
-    public String getDateSubmitted() {
-        return dateSubmitted;
+    public MaintenanceOrder(MaintenanceRequest maintenanceRequest) {
+        this.maintenanceRequest = maintenanceRequest;
+        this.dateSubmitted = maintenanceRequest.getDateRequested();
+        this.maintenanceCost = getMaintenanceCost();
     }
 
-    public String getDateScheduled() {
-        return dateScheduled;
+    public double getMaintenanceCost() {
+        ProblemType type = this.maintenanceRequest.getProblemType();
+        if (type == ProblemType.ELECTRICAL) {
+            return 300;
+        } else if (type == ProblemType.PLUMBING) {
+            return 200;
+        } else if (type == ProblemType.COOLING) {
+            return 150;
+        } else if (type == ProblemType.HEATING) {
+            return 200;
+        } else return 250;
     }
 
-    public void setDateSubmitted(String dateSubmitted) {
-        this.dateSubmitted = dateSubmitted;
+    public int getDowntime() {
+        ProblemType type = this.maintenanceRequest.getProblemType();
+        if (type == ProblemType.ELECTRICAL) {
+            return 2;
+        } else if (type == ProblemType.PLUMBING) {
+            return 1;
+        } else if (type == ProblemType.COOLING) {
+            return 3;
+        } else if (type == ProblemType.HEATING) {
+            return 2;
+        } else return 2;
     }
 
-    public void setDateScheduled(String dateScheduled) {
-        this.dateScheduled = dateScheduled;
-    }
+
 }

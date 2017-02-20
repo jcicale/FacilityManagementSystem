@@ -1,22 +1,7 @@
 package com.tsolomonphillips;
 
-
-import sun.rmi.runtime.Log;
-
-import javax.xml.soap.Detail;
 import java.util.ArrayList;
 import java.util.List;
-
-//public interface Facility
-//{
-//    Administrator administrator = new Administrator();
-//    Maintenance maintenance = new Maintenance();
-//    Log listMaintenance();
-//    List<MaintenanceRequest> listMaintRequests();
-//    boolean isInUseDuringInterval();
-//    List<Log> logList();
-//    List<MaintenanceOrder> maintenanceOrders();
-//}
 
 public class Facility implements IFacility, IFacilityDetail {
     private List<IFacility> subFacilities = new ArrayList<>();
@@ -26,6 +11,7 @@ public class Facility implements IFacility, IFacilityDetail {
     private int baseCapacity;
     private double baseRate;
     private IAdministrator administrator;
+    private IMaintenance maintenance;
 
     public Facility(String name, FacilityType type, int baseCapacity, double baseRate) {
         this.name = name;
@@ -33,6 +19,7 @@ public class Facility implements IFacility, IFacilityDetail {
         this.baseCapacity = baseCapacity;
         this.baseRate = baseRate;
         this.administrator = new Administrator(this);
+        this.maintenance = new Maintenance(this);
     }
 
     @Override
@@ -57,6 +44,9 @@ public class Facility implements IFacility, IFacilityDetail {
 
     @Override
     public void vacateFacility() {
+        for (Tenant tenant : facilityTenants) {
+            tenant.removeTenantFromFacility();
+        }
         facilityTenants.clear();
         for (IFacility facility : subFacilities) {
             facility.vacateFacility();
@@ -67,6 +57,7 @@ public class Facility implements IFacility, IFacilityDetail {
     public boolean addTenant(Tenant tenant) {
         if (facilityTenants.size() < getFacilityInformation().getCapacity()) {
             facilityTenants.add(tenant);
+            tenant.setTenantFacility(this);
             return true;
         }
         return false;
@@ -75,6 +66,7 @@ public class Facility implements IFacility, IFacilityDetail {
     @Override
     public void removeTenant(Tenant tenant) {
         facilityTenants.remove(tenant);
+        tenant.removeTenantFromFacility();
     }
 
     @Override
@@ -89,7 +81,13 @@ public class Facility implements IFacility, IFacilityDetail {
 
     @Override
     public IAdministrator getAdministrator() {
+
         return administrator;
+    }
+
+    @Override
+    public IMaintenance getMaintenance() {
+        return maintenance;
     }
 
     /**
@@ -122,4 +120,10 @@ public class Facility implements IFacility, IFacilityDetail {
     public FacilityType getFacilityType() {
         return type;
     }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 }
+

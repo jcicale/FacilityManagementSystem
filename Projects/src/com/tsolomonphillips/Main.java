@@ -4,6 +4,7 @@ import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Main {
 
@@ -21,22 +22,22 @@ public class Main {
         }
         */
 
-        String date = "02/17/2017";
-        convertStringToDate(date);
+//        String date = "02/17/2017";
+//        convertStringToDate(date);
 
 
 
     }
 
-    static void convertStringToDate(String date)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        try
-        {
-            System.out.println(sdf.parse(date));
-        } catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    static void convertStringToDate(String date)
+//    {
+//        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+//        try
+//        {
+//            System.out.println(sdf.parse(date));
+//        } catch (ParseException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 }

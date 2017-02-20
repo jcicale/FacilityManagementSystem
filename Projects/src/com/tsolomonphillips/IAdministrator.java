@@ -9,8 +9,6 @@ public interface IAdministrator {
     List<IInspection> listInspections();
     void performInspection();
 
-    String listFacilityProblems();
-
     float getOccupiedPercentage(); //calcUsageRate method
     int getAvailableCapacity();
     int getNumberOfTenants(); //actualUsageRate method
