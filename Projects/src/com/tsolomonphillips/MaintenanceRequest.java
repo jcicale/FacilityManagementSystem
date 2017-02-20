@@ -1,6 +1,7 @@
 package com.tsolomonphillips;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by juliacicale1 on 2/16/17.
@@ -13,12 +14,12 @@ public class MaintenanceRequest
     private String idNumber;
     private IFacility facility;
 
-    public MaintenanceRequest(ProblemType problemType, Date dateCreated, String idNumber, IFacility facility)
+    public MaintenanceRequest(ProblemType problemType, Date dateCreated, IFacility facility)
     {
         this.problemType = problemType;
         this.dateCreated = dateCreated;
         this.isCompleted = false;
-        this.idNumber = idNumber;
+        this.idNumber = UUID.randomUUID().toString();
         this.facility = facility;
     }
 
@@ -41,6 +42,7 @@ public class MaintenanceRequest
     public void setProblemType(ProblemType problemType) {
         this.problemType = problemType;
     }
+
 
     public void setDateRequested(Date dateRequested) {
         this.dateCreated = dateRequested;

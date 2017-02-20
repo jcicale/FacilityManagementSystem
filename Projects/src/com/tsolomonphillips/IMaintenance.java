@@ -14,10 +14,10 @@ public interface IMaintenance
     void scheduleMaintenance(MaintenanceOrder order);
     void doMaintenance(MaintenanceRequest request);
 
-    double calcMaintCostForFacility();
-    double calcProblemRateForFacility();
-    void listFacilityProblems();
-    double calcDownTimeForFacility();
+    double calcMaintCostForFacility(MaintenanceOrder order);
+    int calcProblemRateForFacility();
+    List<ProblemType> listFacilityProblems();
+    int calcDownTimeForFacility();
 
     MaintenanceLog getLog();
     Schedule getSchedule();

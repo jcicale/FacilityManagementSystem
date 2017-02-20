@@ -22,4 +22,8 @@ public class MaintenanceLog {
     public List<MaintenanceRequest> getCompletedMaintenance() {
         return completedMaintenance;
     }
+
+    public void addToPendingMaintenance(MaintenanceRequest request) {
+        pendingMaintenance.add(request);
+    }
 }

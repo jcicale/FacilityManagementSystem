@@ -91,7 +91,13 @@ public class Facility implements IFacility, IFacilityDetail {
 
     @Override
     public IAdministrator getAdministrator() {
+
         return administrator;
+    }
+
+    @Override
+    public IMaintenance getMaintenance() {
+        return maintenance;
     }
 
     /**

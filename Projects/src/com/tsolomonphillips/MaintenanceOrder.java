@@ -8,6 +8,7 @@ import java.util.Date;
 public class MaintenanceOrder {
     private Date dateSubmitted;
     private double maintenanceCost;
+    private int downTime;
     private MaintenanceRequest maintenanceRequest;
 
     public MaintenanceOrder(MaintenanceRequest maintenanceRequest) {
@@ -27,6 +28,19 @@ public class MaintenanceOrder {
         } else if (type == ProblemType.HEATING) {
             return 200;
         } else return 250;
+    }
+
+    public int getDowntime() {
+        ProblemType type = this.maintenanceRequest.getProblemType();
+        if (type == ProblemType.ELECTRICAL) {
+            return 2;
+        } else if (type == ProblemType.PLUMBING) {
+            return 1;
+        } else if (type == ProblemType.COOLING) {
+            return 3;
+        } else if (type == ProblemType.HEATING) {
+            return 2;
+        } else return 2;
     }
 
     public Date getDateSubmitted() {

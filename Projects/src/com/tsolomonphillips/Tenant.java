@@ -26,8 +26,9 @@ public class Tenant {
         this.facility = null;
     }
 
-    public MaintenanceRequest makeFacilityMaintenanceRequest(String problemType, Date dateRequested, String idNumber) {
-        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, dateRequested, idNumber, this.facility);
+    public MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType, Date dateRequested) {
+        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, dateRequested, this.facility);
+        facility.getMaintenance().getLog().addToPendingMaintenance(newRequest);
         return newRequest;
     }
 }
