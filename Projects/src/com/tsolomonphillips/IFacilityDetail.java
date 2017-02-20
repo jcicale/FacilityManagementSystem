@@ -10,6 +10,6 @@ public interface IFacilityDetail {
     int getCapacity();
     String getName();
     FacilityType getFacilityType();
-
+    void setName(String name);
 }
 

@@ -1,10 +1,9 @@
 package test;
 
-import com.tsolomonphillips.Facility;
-import com.tsolomonphillips.FacilityType;
-import com.tsolomonphillips.IFacility;
-import com.tsolomonphillips.Tenant;
+import com.tsolomonphillips.*;
 import org.junit.Test;
+
+import java.util.Date;
 
 import static junit.framework.Assert.*;
 
@@ -12,6 +11,8 @@ import static junit.framework.Assert.*;
  * Created by juliacicale1 on 2/18/17.
  */
 public class FacilityTests {
+
+    //test listFacility, addNewFacility, addFacilityDetail and facility structure setup
     @Test
     public void simpleFacilityTest() {
         IFacility firstApartmentComplex = new Facility("First Apartment Complex", FacilityType.COMPLEX, 0, 0);
@@ -21,10 +22,14 @@ public class FacilityTests {
         buildingOne.addFacility(roomOne);
         buildingOne.addFacility(roomTwo);
         firstApartmentComplex.addFacility(buildingOne);
+        firstApartmentComplex.getFacilityInformation().setName("NameChange");
         assertEquals(3, firstApartmentComplex.getFacilityInformation().getCapacity());
+        assertEquals(2, buildingOne.getFacilityList().size());
+        assertEquals("NameChange", firstApartmentComplex.getFacilityInformation().getName());
 
     }
 
+    //testing getFacilityInformation, getAvailableCapacity and another type of setup
     @Test
     public void simpleFacilityTestTwo() {
         IFacility officeOne = new Facility("Office One", FacilityType.BUILDING, 0, 2000);
@@ -35,8 +40,29 @@ public class FacilityTests {
         assertEquals(50.0, roomOne.getFacilityInformation().getRate());
         assertEquals(50.0, roomTwo.getFacilityInformation().getRate());
         assertEquals(2100.0, officeOne.getFacilityInformation().getRate());
+        assertEquals(FacilityType.BUILDING, officeOne.getFacilityInformation().getFacilityType());
+        assertEquals("Office One", officeOne.getFacilityInformation().getName());
+        assertEquals(3, officeOne.getFacilityInformation().getCapacity());
     }
 
+    //test removeFacility
+    @Test
+    public void removeFacilityTest() {
+        IFacility firstApartmentComplex = new Facility("First Apartment Complex", FacilityType.COMPLEX, 0, 0);
+        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
+        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
+        IFacility roomTwo = new Facility("Room Two", FacilityType.ROOM, 1, 900);
+        buildingOne.addFacility(roomOne);
+        buildingOne.addFacility(roomTwo);
+        firstApartmentComplex.addFacility(buildingOne);
+        assertEquals(2, buildingOne.getFacilityList().size());
+        assertEquals(3, buildingOne.getFacilityInformation().getCapacity());
+        buildingOne.removeFacility(roomTwo);
+        assertEquals(1, buildingOne.getFacilityList().size());
+        assertEquals(2, buildingOne.getFacilityInformation().getCapacity());
+    }
+
+    //testing assignFacilityToUse
     @Test
     public void simpleTenantTest() {
         IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 1, 500);
@@ -56,6 +82,7 @@ public class FacilityTests {
         assertEquals(null, tenantOne.getTenantFacility());
     }
 
+    //testing vacateFacility
     @Test
     public void simpleVacateTest() {
         IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 500);
@@ -88,6 +115,7 @@ public class FacilityTests {
         assertEquals(0, roomTwo.getTenants().size());
     }
 
+    //testing actualUsage and calcUsageRate
     @Test
     public void administratorTest() {
         IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
@@ -102,6 +130,7 @@ public class FacilityTests {
         assertEquals(1, buildingOne.getAdministrator().getNumberOfTenants());
     }
 
+    //testing listInspections
     @Test
     public void inspectionTest() {
         IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
@@ -115,4 +144,34 @@ public class FacilityTests {
         assertEquals(1, roomOne.getAdministrator().listInspections().size());
         assertEquals(1, roomTwo.getAdministrator().listInspections().size());
     }
+
+    //testing makeFacilityMaintenanceRequest
+    @Test
+    public void maintenanceRequestTest() {
+        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
+        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
+        buildingOne.addFacility(roomOne);
+        Tenant tenantOne = new Tenant("Tenant One");
+        roomOne.addTenant(tenantOne);
+        assertEquals(0, roomOne.getMaintenance().getLog().getPendingMaintenance().size());
+        MaintenanceRequest sampleRequest = tenantOne.makeFacilityMaintenanceRequest(ProblemType.ELECTRICAL);
+        assertEquals(1, roomOne.getMaintenance().getLog().getPendingMaintenance().size());
+
+    }
+
+    //testing scheduleMaintenance
+    @Test
+    public void scheduleMaintenanceTest() {
+        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
+        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
+        buildingOne.addFacility(roomOne);
+        Tenant tenantOne = new Tenant("Tenant One");
+        roomOne.addTenant(tenantOne);
+        MaintenanceRequest sampleRequest = tenantOne.makeFacilityMaintenanceRequest(ProblemType.ELECTRICAL);
+        MaintenanceOrder sampleOrder = roomOne.getMaintenance().createMaintenanceOrder(sampleRequest);
+        
+        roomOne.getMaintenance().scheduleMaintenance(sampleOrder);
+
+    }
+
 }

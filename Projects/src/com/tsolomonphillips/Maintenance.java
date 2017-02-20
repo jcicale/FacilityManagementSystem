@@ -1,7 +1,5 @@
 package com.tsolomonphillips;
 
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +11,6 @@ public class Maintenance implements IMaintenance
     private MaintenanceLog log;
 
     private IFacility facility;
-
 
     public Maintenance(IFacility facility)
     {

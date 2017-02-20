@@ -3,16 +3,6 @@ package com.tsolomonphillips;
 import java.util.ArrayList;
 import java.util.List;
 
-//public interface Facility
-//{
-//    Maintenance maintenance = new Maintenance();
-//    Log listMaintenance();
-//    List<MaintenanceRequest> listMaintRequests();
-//    boolean isInUseDuringInterval();
-//    List<Log> logList();
-//    List<MaintenanceOrder> maintenanceOrders();
-//}
-
 public class Facility implements IFacility, IFacilityDetail {
     private List<IFacility> subFacilities = new ArrayList<>();
     private List<Tenant> facilityTenants = new ArrayList<>();
@@ -129,6 +119,11 @@ public class Facility implements IFacility, IFacilityDetail {
     @Override
     public FacilityType getFacilityType() {
         return type;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

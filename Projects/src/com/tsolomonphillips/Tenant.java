@@ -26,8 +26,9 @@ public class Tenant {
         this.facility = null;
     }
 
-    public MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType, Date dateRequested) {
-        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, dateRequested, this.facility);
+    public MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType) {
+        Date date = new Date();
+        MaintenanceRequest newRequest = new MaintenanceRequest(problemType, date, this.facility);
         facility.getMaintenance().getLog().addToPendingMaintenance(newRequest);
         return newRequest;
     }
