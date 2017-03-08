@@ -27,6 +27,7 @@ public class MaintenanceRequest implements IMaintenanceRequest
 
    }
 
+
     public boolean getIsCompleted()
     {
         return isCompleted;

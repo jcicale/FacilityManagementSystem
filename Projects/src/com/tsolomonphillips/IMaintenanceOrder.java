@@ -16,5 +16,4 @@ public interface IMaintenanceOrder
     void setDownTime(int downTime);
     void setMaintenanceRequest(MaintenanceRequest maintenanceRequest);
 
-
 }

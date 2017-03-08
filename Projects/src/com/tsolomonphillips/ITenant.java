@@ -11,4 +11,5 @@ public interface ITenant
     void setTenantFacility(IFacility facility);
     void removeTenantFromFacility();
     MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType);
+
 }

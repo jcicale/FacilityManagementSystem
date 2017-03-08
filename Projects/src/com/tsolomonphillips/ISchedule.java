@@ -15,5 +15,4 @@ public interface ISchedule
     void setMaintenanceOrders(List<MaintenanceOrder> maintenanceOrders);
     void setScheduledDates(List<Date> scheduledDates);
     void setMap(Map<MaintenanceOrder, Date> map);
-
 }

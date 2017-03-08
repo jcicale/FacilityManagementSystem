@@ -16,6 +16,7 @@ public class MaintenanceLog implements IMaintenanceLog
         completedMaintenance = new ArrayList<>();
     }*/
 
+
     public MaintenanceLog()
     {
 

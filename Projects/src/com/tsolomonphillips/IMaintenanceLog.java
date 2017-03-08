@@ -12,4 +12,5 @@ public interface IMaintenanceLog
     void addToPendingMaintenance(MaintenanceRequest request);
     void setPendingMaintenance(List<MaintenanceRequest> pendingMaintenance);
     void setCompletedMaintenance(List<MaintenanceRequest> completedMaintenance);
+
 }

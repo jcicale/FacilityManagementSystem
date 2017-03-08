@@ -16,5 +16,4 @@ public interface IMaintenanceRequest
     void setDateCreated(Date dateCreated);
     void setIdNumber(String idNumber);
     void setFacility(IFacility facility);
-
 }

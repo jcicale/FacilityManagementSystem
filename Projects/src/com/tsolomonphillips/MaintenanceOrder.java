@@ -12,6 +12,7 @@ public class MaintenanceOrder implements IMaintenanceOrder
     private int downTime;
     private MaintenanceRequest maintenanceRequest;
 
+
    /* public MaintenanceOrder(MaintenanceRequest maintenanceRequest)
     {
         this.maintenanceRequest = maintenanceRequest;
