@@ -12,13 +12,17 @@ public class Maintenance implements IMaintenance
 
     private IFacility facility;
 
-    public Maintenance(IFacility facility)
+  /*  public Maintenance(IFacility facility)
     {
         this.facility = facility;
         this.log = new MaintenanceLog();
         this.schedule = new Schedule();
-    }
+    }*/
 
+    public Maintenance()
+    {
+
+    }
 
     @Override
     public List<MaintenanceRequest> listMaintRequests() {
@@ -31,7 +35,8 @@ public class Maintenance implements IMaintenance
     }
 
     @Override
-    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request) {
+    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request)
+    {
         return new MaintenanceOrder(request);
     }
 
