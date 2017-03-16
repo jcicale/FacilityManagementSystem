@@ -12,26 +12,33 @@ public class Maintenance implements IMaintenance
 
     private IFacility facility;
 
-    public Maintenance(IFacility facility)
+  /*  public Maintenance(IFacility facility)
     {
         this.facility = facility;
         this.log = new MaintenanceLog();
         this.schedule = new Schedule();
+    }*/
+
+    public Maintenance()
+    {
+
     }
 
-
     @Override
-    public List<MaintenanceRequest> listMaintRequests() {
+    public List<MaintenanceRequest> listMaintRequests()
+    {
         return this.log.getPendingMaintenance();
     }
 
     @Override
-    public List<MaintenanceRequest> listMaintenance() {
+    public List<MaintenanceRequest> listMaintenance()
+    {
         return this.log.getCompletedMaintenance();
     }
 
     @Override
-    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request) {
+    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request)
+    {
         return new MaintenanceOrder(request);
     }
 
@@ -72,10 +79,12 @@ public class Maintenance implements IMaintenance
     @Override
     public List<ProblemType> listFacilityProblems() {
         List<ProblemType> problemList = new ArrayList<>();
-        for (MaintenanceRequest request : log.getCompletedMaintenance()) {
+        for (MaintenanceRequest request : log.getCompletedMaintenance())
+        {
             problemList.add(request.getProblemType());
         }
-        for (MaintenanceRequest request : log.getPendingMaintenance()) {
+        for (MaintenanceRequest request : log.getPendingMaintenance())
+        {
             problemList.add(request.getProblemType());
         }
         return problemList;
@@ -85,7 +94,8 @@ public class Maintenance implements IMaintenance
     public int calcDownTimeForFacility()
     {
         int downtime = 0;
-        for (MaintenanceOrder order : schedule.getMaintenanceOrders()) {
+        for (MaintenanceOrder order : schedule.getMaintenanceOrders())
+        {
             downtime += order.getDowntime();
         }
         return downtime;
@@ -103,5 +113,10 @@ public class Maintenance implements IMaintenance
         return this.schedule;
     }
 
+    /////////////////////
+    public IFacility getIFacility()
+    {
+        return this.facility;
+    }
 
 }

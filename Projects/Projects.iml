@@ -17,5 +17,20 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../spring-framework-4.3.6.RELEASE-dist/spring-framework-4.3.6.RELEASE/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../../spring-framework-4.3.6.RELEASE-dist/spring-framework-4.3.6.RELEASE/libs" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../../../spring-framework-4.3.6.RELEASE-dist/spring-framework-4.3.6.RELEASE/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../../spring-framework-4.3.6.RELEASE-dist/spring-framework-4.3.6.RELEASE/libs" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" exported="" name="org.springframework:spring-context:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="org.springframework:spring-core:4.3.6.RELEASE" level="project" />
   </component>
 </module>

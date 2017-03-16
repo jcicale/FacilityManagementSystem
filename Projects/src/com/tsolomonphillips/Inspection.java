@@ -10,7 +10,8 @@ public class Inspection implements IInspection {
     private Date date;
     private IFacility facility;
 
-    public Inspection(String idNumber, Date date, IFacility facility) {
+    public Inspection(String idNumber, Date date, IFacility facility)
+    {
         this.idNumber = idNumber;
         this.date = date;
         this. facility = facility;

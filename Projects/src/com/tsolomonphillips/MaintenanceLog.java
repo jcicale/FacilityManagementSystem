@@ -1,29 +1,52 @@
 package com.tsolomonphillips;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Tyree on 2/18/2017.
  */
-public class MaintenanceLog {
+public class MaintenanceLog implements IMaintenanceLog
+{
     private List<MaintenanceRequest> pendingMaintenance;
     private List<MaintenanceRequest> completedMaintenance;
 
-    public MaintenanceLog() {
+  /*  public MaintenanceLog()
+    {
         pendingMaintenance = new ArrayList<>();
         completedMaintenance = new ArrayList<>();
+    }*/
+
+
+    public MaintenanceLog()
+    {
+
     }
 
-    public List<MaintenanceRequest> getPendingMaintenance() {
+    public void setPendingMaintenance(List<MaintenanceRequest> pendingMaintenance)
+    {
+        this.pendingMaintenance = pendingMaintenance;
+    }
+
+    public void setCompletedMaintenance(List<MaintenanceRequest> completedMaintenance)
+    {
+        this.completedMaintenance = completedMaintenance;
+    }
+
+    @Override
+    public List<MaintenanceRequest> getPendingMaintenance()
+    {
         return pendingMaintenance;
     }
 
-    public List<MaintenanceRequest> getCompletedMaintenance() {
+   @Override
+    public List<MaintenanceRequest> getCompletedMaintenance()
+    {
         return completedMaintenance;
     }
 
-    public void addToPendingMaintenance(MaintenanceRequest request) {
+    @Override
+    public void addToPendingMaintenance(MaintenanceRequest request)
+    {
         pendingMaintenance.add(request);
     }
 }
