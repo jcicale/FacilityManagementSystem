@@ -22,4 +22,7 @@ public interface IMaintenance
     MaintenanceLog getLog();
     Schedule getSchedule();
 
+    //////////////
+    IFacility getIFacility();
+
 }

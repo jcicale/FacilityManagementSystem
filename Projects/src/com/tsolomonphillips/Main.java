@@ -1,15 +1,24 @@
 package com.tsolomonphillips;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
     public static void main(String[] args)
     {
+
+        //BeanFactory factory = new XmlPortletApplicationContext();
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        Maintenance maintenance = (Maintenance) context.getBean("facility");
+
+        IFacility facility = maintenance.getIFacility();
+
+
+
+
+
+
 
         /*SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         String date = "04/21/1998";
