@@ -1,5 +1,6 @@
 package com.tsolomonphillips.model.facility;
 
+import com.tsolomonphillips.model.administrator.Administrator;
 import com.tsolomonphillips.model.administrator.IAdministrator;
 import com.tsolomonphillips.model.maintenance.IMaintenance;
 
@@ -13,13 +14,22 @@ public interface IFacility {
 
     void addFacility(IFacility facility);
     void removeFacility(IFacility facility);
-    List<IFacility> getFacilityList();
+
+    void setSubFacilities(List<IFacility> subFacilities);
+    List<IFacility> getSubFacilities();
 
     void vacateFacility();
-    boolean addTenant(Tenant tenant);
-    void removeTenant(Tenant tenant);
-    List<Tenant> getTenants(); //listActualUsage method
+    boolean addTenant(ITenant tenant);
+    void removeTenant(ITenant tenant);
+    List<ITenant> getTenants(); //listActualUsage method
 
+    void setFacilityTenants(List<ITenant> facilityTenants);
+    List<ITenant> getFacilityTenants();
+
+    void setAdministrator(IAdministrator administrator);
     IAdministrator getAdministrator();
+
+    void setMaintenance(IMaintenance maintenance);
     IMaintenance getMaintenance();
+
 }

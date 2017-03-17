@@ -28,7 +28,7 @@ public class FacilityTests {
         firstApartmentComplex.addFacility(buildingOne);
         firstApartmentComplex.getFacilityInformation().setName("NameChange");
         assertEquals(3, firstApartmentComplex.getFacilityInformation().getCapacity());
-        assertEquals(2, buildingOne.getFacilityList().size());
+        assertEquals(2, buildingOne.getSubFacilities().size());
         assertEquals("NameChange", firstApartmentComplex.getFacilityInformation().getName());
 
     }
@@ -59,10 +59,10 @@ public class FacilityTests {
         buildingOne.addFacility(roomOne);
         buildingOne.addFacility(roomTwo);
         firstApartmentComplex.addFacility(buildingOne);
-        assertEquals(2, buildingOne.getFacilityList().size());
+        assertEquals(2, buildingOne.getSubFacilities().size());
         assertEquals(3, buildingOne.getFacilityInformation().getCapacity());
         buildingOne.removeFacility(roomTwo);
-        assertEquals(1, buildingOne.getFacilityList().size());
+        assertEquals(1, buildingOne.getSubFacilities().size());
         assertEquals(2, buildingOne.getFacilityInformation().getCapacity());
     }
 

@@ -17,11 +17,15 @@ public class Administrator implements IAdministrator {
         this.facility = facility;
     }
 
+    public Administrator() {
+
+    }
+
     @Override
     public List<IInspection> listInspections() {
         List<IInspection> allInspections = new ArrayList<>();
         allInspections.addAll(inspectionList);
-        for (IFacility facility : facility.getFacilityList()) {
+        for (IFacility facility : facility.getSubFacilities()) {
             allInspections.addAll(facility.getAdministrator().listInspections());
         }
         return allInspections;

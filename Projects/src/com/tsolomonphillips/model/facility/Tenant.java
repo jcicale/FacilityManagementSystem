@@ -19,10 +19,10 @@ public Tenant(String name)
         facility = null;
     }
 
-//    public Tenant ()
-//    {
-//
-//    }
+    public Tenant ()
+    {
+
+    }
 
     public String getName()
     {

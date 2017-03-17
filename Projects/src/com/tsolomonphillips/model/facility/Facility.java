@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Facility implements IFacility, IFacilityDetail {
-    private List<IFacility> subFacilities = new ArrayList<>();
-    private List<Tenant> facilityTenants = new ArrayList<>();
+    private List<IFacility> subFacilities;
+    private List<ITenant> facilityTenants;
+    private IAdministrator administrator;
+    private IMaintenance maintenance;
     private String name;
     private FacilityType type;
     private int baseCapacity;
     private double baseRate;
-    private IAdministrator administrator;
-    private IMaintenance maintenance;
 
     public Facility(String name, FacilityType type, int baseCapacity, double baseRate) {
         this.name = name;
@@ -25,6 +25,10 @@ public class Facility implements IFacility, IFacilityDetail {
         this.baseRate = baseRate;
         this.administrator = new Administrator(this);
         this.maintenance = new Maintenance(this);
+    }
+
+    public Facility() {
+
     }
 
     @Override
@@ -43,13 +47,8 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
-    public List<IFacility> getFacilityList() {
-        return subFacilities;
-    }
-
-    @Override
     public void vacateFacility() {
-        for (Tenant tenant : facilityTenants) {
+        for (ITenant tenant : facilityTenants) {
             tenant.removeTenantFromFacility();
         }
         facilityTenants.clear();
@@ -59,7 +58,7 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
-    public boolean addTenant(Tenant tenant) {
+    public boolean addTenant(ITenant tenant) {
         if (facilityTenants.size() < getFacilityInformation().getCapacity()) {
             facilityTenants.add(tenant);
             tenant.setTenantFacility(this);
@@ -69,14 +68,16 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
-    public void removeTenant(Tenant tenant) {
+    public void removeTenant(ITenant tenant) {
         facilityTenants.remove(tenant);
         tenant.removeTenantFromFacility();
     }
 
+    //***********************************************
+    //old implementation of getFacilityTenants - need to figure out how the new one will still do this.
     @Override
-    public List<Tenant> getTenants() {
-        List<Tenant> allTenants = new ArrayList<>();
+    public List<ITenant> getTenants() {
+        List<ITenant> allTenants = new ArrayList<>();
         allTenants.addAll(facilityTenants);
         for (IFacility facility : subFacilities) {
             allTenants.addAll(facility.getTenants());
@@ -84,10 +85,44 @@ public class Facility implements IFacility, IFacilityDetail {
         return  allTenants;
     }
 
+    //*********************************************
+    //Getters and setters, used by Spring
+    @Override
+    public void setSubFacilities(List<IFacility> subFacilities) {
+        this.subFacilities = subFacilities;
+    }
+
+    @Override
+    public List<IFacility> getSubFacilities() {
+        return subFacilities;
+    }
+
+
+    @Override
+    public void setFacilityTenants(List<ITenant> facilityTenants) {
+        this.facilityTenants = facilityTenants;
+    }
+
+    @Override
+    public List<ITenant> getFacilityTenants() {
+        return facilityTenants;
+    }
+
+
+    @Override
+    public void setAdministrator(IAdministrator administrator) {
+        this.administrator = administrator;
+    }
+
     @Override
     public IAdministrator getAdministrator() {
-
         return administrator;
+    }
+
+
+    @Override
+    public void setMaintenance(IMaintenance maintenance) {
+        this.maintenance = maintenance;
     }
 
     @Override
@@ -95,9 +130,17 @@ public class Facility implements IFacility, IFacilityDetail {
         return maintenance;
     }
 
+
+
+
     /**
      * IFacilityDetail
      */
+    @Override
+    public void setBaseRate(double baseRate) {
+        this.baseRate = baseRate;
+    }
+
     @Override
     public double getRate() {
         double totalRate = baseRate;
@@ -105,6 +148,11 @@ public class Facility implements IFacility, IFacilityDetail {
             totalRate += facility.getFacilityInformation().getRate();
         }
         return totalRate;
+    }
+
+    @Override
+    public void setBaseCapacity(int baseCapacity) {
+        this.baseCapacity = baseCapacity;
     }
 
     @Override
@@ -117,8 +165,18 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void setFacilityType(FacilityType type) {
+        this.type = type;
     }
 
     @Override
@@ -126,9 +184,7 @@ public class Facility implements IFacility, IFacilityDetail {
         return type;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
+
+
 }
 

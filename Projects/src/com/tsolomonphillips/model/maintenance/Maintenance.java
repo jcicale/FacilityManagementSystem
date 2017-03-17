@@ -21,6 +21,10 @@ public class Maintenance implements IMaintenance
         this.schedule = new Schedule();
     }
 
+    public Maintenance() {
+
+    }
+
     @Override
     public List<MaintenanceRequest> listMaintRequests()
     {
