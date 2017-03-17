@@ -1,9 +1,13 @@
 package test;
 
-import com.tsolomonphillips.*;
+import com.tsolomonphillips.model.facility.Facility;
+import com.tsolomonphillips.model.facility.FacilityType;
+import com.tsolomonphillips.model.facility.IFacility;
+import com.tsolomonphillips.model.facility.Tenant;
+import com.tsolomonphillips.model.maintenance.MaintenanceOrder;
+import com.tsolomonphillips.model.maintenance.MaintenanceRequest;
+import com.tsolomonphillips.model.maintenance.ProblemType;
 import org.junit.Test;
-
-import java.util.Date;
 
 import static junit.framework.Assert.*;
 
