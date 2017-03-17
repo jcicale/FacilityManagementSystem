@@ -32,4 +32,19 @@ public interface IFacility {
     void setMaintenance(IMaintenance maintenance);
     IMaintenance getMaintenance();
 
+    ///trying some shit
+
+    void setBaseRate(double baseRate);
+    double getRate();
+
+    void setBaseCapacity(int baseCapacity);
+    int getCapacity();
+
+
+    void setName(String name);
+    String getName();
+
+    void setFacilityType(FacilityType type);
+    FacilityType getFacilityType();
+
 }

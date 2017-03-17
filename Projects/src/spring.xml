@@ -15,9 +15,10 @@
 
     <bean id ="facility" class="com.tsolomonphillips.model.facility.Facility" scope="prototype">
         <property name="subFacilities">
-            <list>
-                <ref bean="facility"/>
-            </list>
+            <list/>
+            <!--<list/>-->
+                <!--<ref bean="facility"/>-->
+            <!--</list>-->
         </property>
         <property name="facilityTenants">
             <list>

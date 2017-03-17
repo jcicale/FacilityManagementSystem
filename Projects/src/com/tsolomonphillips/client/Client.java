@@ -16,17 +16,48 @@ public class Client {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         System.out.println("***************** Application Context instantiated! ******************");
 
+        //Instantiate our first complex using Spring
         IFacility firstApartmentComplex = (IFacility) context.getBean("facility");
         firstApartmentComplex.setName("First Apartment Complex");
+        firstApartmentComplex.setFacilityType(FacilityType.COMPLEX);
+        firstApartmentComplex.setBaseCapacity(0);
+        firstApartmentComplex.setBaseRate(0);
 
-        //adding a facility - one apartment complex containing one building which contains two rooms
-        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
-        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
-        IFacility roomTwo = new Facility("Room Two", FacilityType.ROOM, 1, 900);
+        //Instantiate the first building
+        IFacility buildingOne = (IFacility) context.getBean("facility");
+        buildingOne.setName("Building One");
+        buildingOne.setFacilityType(FacilityType.BUILDING);
+        buildingOne.setBaseCapacity(0);
+        buildingOne.setBaseRate(0);
+
+        //Instantiate two rooms
+        IFacility roomOne = (IFacility) context.getBean("facility");
+        roomOne.setName("Room One");
+        roomOne.setFacilityType(FacilityType.ROOM);
+        roomOne.setBaseCapacity(2);
+        roomOne.setBaseRate(1200);
+        IFacility roomTwo = (IFacility) context.getBean("facility");
+        roomTwo.setName("Room Two");
+        roomTwo.setFacilityType(FacilityType.ROOM);
+        roomTwo.setBaseCapacity(1);
+        roomTwo.setBaseRate(900);
+
+        //add rooms to building, add building to complex
         buildingOne.addFacility(roomOne);
         buildingOne.addFacility(roomTwo);
         firstApartmentComplex.addFacility(buildingOne);
 
+
+
+        //adding a facility - one apartment complex containing one building which contains two rooms
+//        IFacility firstApartmentComplex = new Facility("First Apartment Complex", FacilityType.COMPLEX, 0, 0);
+//        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
+//        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
+//        IFacility roomTwo = new Facility("Room Two", FacilityType.ROOM, 1, 900);
+//        buildingOne.addFacility(roomOne);
+//        buildingOne.addFacility(roomTwo);
+//        firstApartmentComplex.addFacility(buildingOne);
+//
         //print out current facility status
         System.out.println("A new facility has been constructed! The facility name is " + firstApartmentComplex.getFacilityInformation().getName() + ".");
         System.out.println("The capacity of this facility is " + firstApartmentComplex.getFacilityInformation().getCapacity() + ".");
