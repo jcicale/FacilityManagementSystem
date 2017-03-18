@@ -24,31 +24,37 @@ public Tenant(String name)
 
     }
 
+    @Override
     public String getName()
     {
         return name;
     }
 
+    @Override
     public void setName(String name)
     {
         this.name = name;
     }
 
+    @Override
     public void setTenantFacility(IFacility facility)
     {
         this.facility = facility;
     }
 
+    @Override
     public IFacility getTenantFacility()
     {
         return this.facility;
     }
 
+    @Override
     public void removeTenantFromFacility()
     {
         this.facility = null;
     }
 
+    @Override
     public MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType)
     {
         Date date = new Date();

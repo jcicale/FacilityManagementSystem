@@ -9,21 +9,17 @@
 
     <context:component-scan base-package="com.tsolomonphillips"/>
 
-    <bean id="tenant" class="com.tsolomonphillips.model.facility.Tenant" scope="prototype"/>
-    <bean id="administrator" class="com.tsolomonphillips.model.administrator.Administrator" scope="prototype"/>
-    <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype"/>
-
     <bean id ="facility" class="com.tsolomonphillips.model.facility.Facility" scope="prototype">
         <property name="subFacilities">
             <list/>
             <!--<list/>-->
-                <!--<ref bean="facility"/>-->
+            <!--<ref bean="facility"/>-->
             <!--</list>-->
         </property>
         <property name="facilityTenants">
-            <list>
-                <ref bean="tenant"/>
-            </list>
+            <list/>
+            <!--<ref bean="tenant"/>-->
+            <!--</list>-->
         </property>
         <property name="administrator" ref="administrator"/>
         <property name="maintenance" ref="maintenance"/>
@@ -33,6 +29,34 @@
         <property name="facilityType" value="BUILDING"/>
     </bean>
 
+    <bean id="tenant" class="com.tsolomonphillips.model.facility.Tenant" scope="prototype"/>
+    <bean id="administrator" class="com.tsolomonphillips.model.administrator.Administrator" scope="prototype">
+        <property name="inspectionList">
+            <list/>
+            <!--<list/>-->
+            <!--<ref bean="inspection"/>-->
+            <!--</list>-->
+        </property>
+    </bean>
+    <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype"/>
+
+    <!--Beans for current date-->
+    <bean id="dateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="yyyy-MM-dd" />
+    </bean>
+
+
+    <bean id="currentDate" class="java.util.Date" factory-bean="dateFormat" factory-method="format">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="inspection" class="com.tsolomonphillips.model.administrator.Inspection" scope="prototype">
+        <property name="date" ref="currentDate"/>
+        <property name="facility" ref="facility"/>
+        <property name="ID" value=""/>
+    </bean>
 
 
 </beans>

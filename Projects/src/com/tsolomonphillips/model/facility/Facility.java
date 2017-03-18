@@ -58,13 +58,22 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
-    public boolean addTenant(ITenant tenant) {
-        if (facilityTenants.size() < getFacilityInformation().getCapacity()) {
-            facilityTenants.add(tenant);
-            tenant.setTenantFacility(this);
-            return true;
+    public boolean addTenant(ITenant tenant) throws IllegalStateException {
+        try {
+            if (facilityTenants.size() < getFacilityInformation().getCapacity()) {
+                facilityTenants.add(tenant);
+                tenant.setTenantFacility(this);
+                return true;
+            }
+            else {
+                throw new IllegalStateException();
+            }
         }
-        return false;
+        catch (IllegalStateException exception) {
+            System.out.println(name + "'s capacity is full, cannot add  tenant.");
+            return false;
+        }
+
     }
 
     @Override

@@ -32,7 +32,8 @@ public interface IFacility {
     void setMaintenance(IMaintenance maintenance);
     IMaintenance getMaintenance();
 
-    ///trying some shit
+
+    ///double check this stuff later
 
     void setBaseRate(double baseRate);
     double getRate();

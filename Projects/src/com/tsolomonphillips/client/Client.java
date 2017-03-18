@@ -1,14 +1,18 @@
 package com.tsolomonphillips.client;
 
 import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import com.tsolomonphillips.model.administrator.IInspection;
 import com.tsolomonphillips.model.facility.Facility;
 import com.tsolomonphillips.model.facility.FacilityType;
 import com.tsolomonphillips.model.facility.IFacility;
+import com.tsolomonphillips.model.facility.ITenant;
 import com.tsolomonphillips.model.maintenance.Maintenance;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Client {
 
@@ -47,17 +51,6 @@ public class Client {
         buildingOne.addFacility(roomTwo);
         firstApartmentComplex.addFacility(buildingOne);
 
-
-
-        //adding a facility - one apartment complex containing one building which contains two rooms
-//        IFacility firstApartmentComplex = new Facility("First Apartment Complex", FacilityType.COMPLEX, 0, 0);
-//        IFacility buildingOne = new Facility("Building One", FacilityType.BUILDING, 0, 0);
-//        IFacility roomOne = new Facility("Room One", FacilityType.ROOM, 2, 1200);
-//        IFacility roomTwo = new Facility("Room Two", FacilityType.ROOM, 1, 900);
-//        buildingOne.addFacility(roomOne);
-//        buildingOne.addFacility(roomTwo);
-//        firstApartmentComplex.addFacility(buildingOne);
-//
         //print out current facility status
         System.out.println("A new facility has been constructed! The facility name is " + firstApartmentComplex.getFacilityInformation().getName() + ".");
         System.out.println("The capacity of this facility is " + firstApartmentComplex.getFacilityInformation().getCapacity() + ".");
@@ -76,8 +69,43 @@ public class Client {
         firstApartmentComplex.getFacilityInformation().setName("The Loyola Apartments");
         System.out.println("The first facility's name has been updated to " + firstApartmentComplex.getFacilityInformation().getName() + ".");
 
+        //add a third room
+        IFacility roomThree = (IFacility) context.getBean("facility");
+        roomThree.setName("Room Three");
+        roomThree.setFacilityType(FacilityType.ROOM);
+        roomThree.setBaseCapacity(2);
+        roomThree.setBaseRate(2000);
+        buildingOne.addFacility(roomThree);
+        System.out.println("Added "+ roomThree.getFacilityInformation().getName() + " to " + buildingOne.getName() + ".");
+        System.out.println(firstApartmentComplex.getName() + " now has a capacity of " + firstApartmentComplex.getCapacity() + ".");
 
+        //instantiate and add some tenants
+        ITenant firstTenant = (ITenant) context.getBean("tenant");
+        firstTenant.setName("Walter White");
+        roomOne.addTenant(firstTenant);
+        ITenant secondTenant = (ITenant) context.getBean("tenant");
+        secondTenant.setName("Bruce Wayne");
+        roomOne.addTenant(secondTenant);
+        ITenant thirdTenant = (ITenant) context.getBean("tenant");
+        //try to add a third tenant - won't work as it will go over capacity
+        thirdTenant.setName("Maxwell Smart");
+        roomOne.addTenant(thirdTenant);
+        //put him in room two instead
+        roomTwo.addTenant(thirdTenant);
+        ITenant fourthTenant = (ITenant) context.getBean("tenant");
+        fourthTenant.setName("Barack Obama");
+        roomThree.addTenant(fourthTenant);
+        ITenant fifthTenant = (ITenant) context.getBean("tenant");
+        fifthTenant.setName("Ron Swanson");
+        roomThree.addTenant(fifthTenant);
 
+        //perform some inspections
+        IInspection firstInspection = (IInspection) context.getBean("inspection");
+        Date currentDate = (Date) context.getBean("currentDate");
+        firstInspection.setDate(currentDate);
+        firstInspection.setID(UUID.randomUUID().toString());
+        firstApartmentComplex.getAdministrator().performInspection(firstInspection);
 
+        System.out.println(firstInspection.getFacility());
     }
 }

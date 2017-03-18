@@ -11,4 +11,8 @@ public interface IInspection {
     String getID();
     Date getDate();
     IFacility getFacility();
+
+    void setID(String idNumber);
+    void setDate(Date date);
+    void setFacility(IFacility facility);
 }

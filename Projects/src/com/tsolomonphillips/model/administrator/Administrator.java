@@ -11,7 +11,7 @@ import java.util.UUID;
  */
 public class Administrator implements IAdministrator {
     private IFacility facility;
-    private List<IInspection> inspectionList = new ArrayList<>();
+    private List<IInspection> inspectionList;
 
     public Administrator(IFacility facility) {
         this.facility = facility;
@@ -21,6 +21,27 @@ public class Administrator implements IAdministrator {
 
     }
 
+    @Override
+    public void setFacility(IFacility facility) {
+        this.facility = facility;
+    }
+
+    @Override
+    public IFacility getFacility() {
+        return facility;
+    }
+
+    @Override
+    public void setInspectionList(List<IInspection> inspectionList) {
+        this.inspectionList = inspectionList;
+    }
+
+    @Override
+    public List<IInspection> getInspectionList() {
+        return inspectionList;
+    }
+
+    //gotta figure this one out too
     @Override
     public List<IInspection> listInspections() {
         List<IInspection> allInspections = new ArrayList<>();
@@ -32,8 +53,7 @@ public class Administrator implements IAdministrator {
     }
 
     @Override
-    public void performInspection() {
-        IInspection inspection = new Inspection(UUID.randomUUID().toString(), new Date(), this.facility);
+    public void performInspection(IInspection inspection) {
         inspectionList.add(inspection);
     }
 

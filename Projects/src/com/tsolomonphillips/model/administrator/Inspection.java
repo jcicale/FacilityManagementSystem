@@ -19,6 +19,10 @@ public class Inspection implements IInspection {
         this. facility = facility;
     }
 
+    public Inspection() {
+
+    }
+
     @Override
     public String getID() {
         return idNumber;
@@ -34,4 +38,18 @@ public class Inspection implements IInspection {
         return facility;
     }
 
+    @Override
+    public void setID(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    @Override
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public void setFacility(IFacility facility) {
+        this.facility = facility;
+    }
 }
