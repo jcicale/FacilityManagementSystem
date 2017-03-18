@@ -114,6 +114,16 @@ public class Maintenance implements IMaintenance
         return this.schedule;
     }
 
+    @Override
+    public void setLog(MaintenanceLog log) {
+        this.log = log;
+    }
+
+    @Override
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
     /////////////////////
     public IFacility getIFacility()
     {

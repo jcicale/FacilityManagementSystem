@@ -23,6 +23,8 @@ public interface IMaintenance
 
     MaintenanceLog getLog();
     Schedule getSchedule();
+    void setLog(MaintenanceLog log);
+    void setSchedule(Schedule schedule);
 
     //////////////
     IFacility getIFacility();

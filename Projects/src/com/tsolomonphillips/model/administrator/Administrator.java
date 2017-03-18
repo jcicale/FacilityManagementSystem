@@ -59,17 +59,20 @@ public class Administrator implements IAdministrator {
 
     @Override
     public float getOccupiedPercentage() {
-        if (facility.getFacilityInformation().getCapacity() == 0) return 1;
-        return (float)facility.getTenants().size()/(float)facility.getFacilityInformation().getCapacity();
+//        if (facility.getFacilityInformation().getCapacity() == 0) return 1;
+//        return (float)facility.getTenants().size()/(float)facility.getFacilityInformation().getCapacity();
+        return 0;
     }
 
     @Override
     public int getAvailableCapacity() {
-        return facility.getFacilityInformation().getCapacity() - facility.getTenants().size();
+//        return facility.getFacilityInformation().getCapacity() - facility.getTenants().size();
+        return 0;
     }
 
     @Override
     public int getNumberOfTenants() {
-        return facility.getTenants().size();
+//        return facility.getTenants().size();
+        return 0;
     }
 }

@@ -20,6 +20,10 @@ public class MaintenanceOrder implements IMaintenanceOrder
         this.maintenanceCost = getMaintenanceCost();
     }
 
+    public MaintenanceOrder() {
+
+    }
+
 
     public Date getDateSubmitted()
     {

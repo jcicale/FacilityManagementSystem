@@ -11,6 +11,7 @@ import java.util.List;
 public class Facility implements IFacility, IFacilityDetail {
     private List<IFacility> subFacilities;
     private List<ITenant> facilityTenants;
+    private List<ITenant> allTenants;
     private IAdministrator administrator;
     private IMaintenance maintenance;
     private String name;
@@ -85,13 +86,13 @@ public class Facility implements IFacility, IFacilityDetail {
     //***********************************************
     //old implementation of getFacilityTenants - need to figure out how the new one will still do this.
     @Override
-    public List<ITenant> getTenants() {
-        List<ITenant> allTenants = new ArrayList<>();
-        allTenants.addAll(facilityTenants);
+    public List<ITenant> listActualUsage() {
+        List<ITenant> allTenantList = allTenants;
+        allTenantList.addAll(facilityTenants);
         for (IFacility facility : subFacilities) {
-            allTenants.addAll(facility.getTenants());
+            allTenantList.addAll(facility.listActualUsage());
         }
-        return  allTenants;
+        return  allTenantList;
     }
 
     //*********************************************
@@ -117,6 +118,15 @@ public class Facility implements IFacility, IFacilityDetail {
         return facilityTenants;
     }
 
+    @Override
+    public void setAllTenants(List<ITenant> allTenants) {
+        this.allTenants = allTenants;
+    }
+
+    @Override
+    public List<ITenant> getAllTenants() {
+        return allTenants;
+    }
 
     @Override
     public void setAdministrator(IAdministrator administrator) {

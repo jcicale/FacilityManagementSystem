@@ -25,10 +25,10 @@ public MaintenanceRequest(ProblemType problemType, Date dateCreated, IFacility f
         this.facility = facility;
     }
 
-//   public MaintenanceRequest(ProblemType problemType, Date date, IFacility facility)
-//   {
-//
-//   }
+   public MaintenanceRequest()
+   {
+
+   }
 
 
     public boolean getIsCompleted()

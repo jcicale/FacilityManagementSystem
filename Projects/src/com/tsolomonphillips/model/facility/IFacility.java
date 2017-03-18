@@ -21,10 +21,13 @@ public interface IFacility {
     void vacateFacility();
     boolean addTenant(ITenant tenant);
     void removeTenant(ITenant tenant);
-    List<ITenant> getTenants(); //listActualUsage method
+    List<ITenant> listActualUsage(); //listActualUsage method, used to be called getTenants
 
     void setFacilityTenants(List<ITenant> facilityTenants);
     List<ITenant> getFacilityTenants();
+
+    void setAllTenants(List<ITenant> allTenants);
+    List<ITenant> getAllTenants();
 
     void setAdministrator(IAdministrator administrator);
     IAdministrator getAdministrator();

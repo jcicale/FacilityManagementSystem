@@ -12,7 +12,6 @@
     <bean id ="facility" class="com.tsolomonphillips.model.facility.Facility" scope="prototype">
         <property name="subFacilities">
             <list/>
-            <!--<list/>-->
             <!--<ref bean="facility"/>-->
             <!--</list>-->
         </property>
@@ -21,28 +20,72 @@
             <!--<ref bean="tenant"/>-->
             <!--</list>-->
         </property>
+        <property name="allTenants">
+            <list/>
+            <!--<ref bean="tenant"/>-->
+            <!--</list>-->
+        </property>
         <property name="administrator" ref="administrator"/>
         <property name="maintenance" ref="maintenance"/>
-        <property name="name" value=""/>
-        <property name="baseCapacity" value="0"/>
-        <property name="baseRate" value="0"/>
-        <property name="facilityType" value="BUILDING"/>
     </bean>
 
     <bean id="tenant" class="com.tsolomonphillips.model.facility.Tenant" scope="prototype"/>
+
     <bean id="administrator" class="com.tsolomonphillips.model.administrator.Administrator" scope="prototype">
         <property name="inspectionList">
             <list/>
-            <!--<list/>-->
             <!--<ref bean="inspection"/>-->
             <!--</list>-->
         </property>
     </bean>
-    <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype"/>
+
+    <bean id="schedule" class="com.tsolomonphillips.model.maintenance.Schedule" scope="prototype">
+        <property name="maintenanceOrders">
+            <list>
+                <ref bean="maintenanceOrder"/>
+            </list>
+        </property>
+        <property name="scheduledDates">
+            <list>
+                <ref bean="currentDate"/>
+            </list>
+        </property>
+        <property name="map">
+            <map/>
+            <!--not sure what else I need to do here-->
+        </property>
+    </bean>
+
+    <bean id="maintenanceOrder" class="com.tsolomonphillips.model.maintenance.MaintenanceOrder" scope="prototype">
+        <!--not done yet!-->
+    </bean>
+
+    <bean id="maintenanceLog" class="com.tsolomonphillips.model.maintenance.MaintenanceLog" scope="prototype">
+        <property name="completedMaintenance">
+            <list/>
+            <!--<ref bean="maintenanceRequest"/>-->
+            <!--</list>-->
+        </property>
+        <property name="pendingMaintenance">
+            <list/>
+            <!--<ref bean="maintenanceRequest"/>-->
+            <!--</list>-->
+        </property>
+    </bean>
+
+    <bean id="maintenanceRequest" class="com.tsolomonphillips.model.maintenance.MaintenanceRequest" scope="prototype">
+        <!--<property name="completed" value="false"/>-->
+        <!--<property name="dateCreated" ref="currentDate"/>-->
+    </bean>
+
+    <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype">
+        <property name="schedule" ref="schedule"/>
+        <property name="log" ref="maintenanceLog"/>
+    </bean>
 
     <!--Beans for current date-->
     <bean id="dateFormat" class="java.text.SimpleDateFormat">
-        <constructor-arg value="yyyy-MM-dd" />
+        <constructor-arg value="yyyy/MM/dd" />
     </bean>
 
 
@@ -53,7 +96,7 @@
     </bean>
 
     <bean id="inspection" class="com.tsolomonphillips.model.administrator.Inspection" scope="prototype">
-        <property name="date" ref="currentDate"/>
+        <!--<property name="date" ref="currentDate"/>-->
         <property name="facility" ref="facility"/>
         <property name="ID" value=""/>
     </bean>
