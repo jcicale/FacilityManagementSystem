@@ -25,11 +25,11 @@ public interface IMaintenance
     MaintenanceLog getLog();
     Schedule getSchedule();
     List<ProblemType> getFacilityProblems();
+    IFacility getFacility();
+
     void setLog(MaintenanceLog log);
     void setSchedule(Schedule schedule);
     void setFacilityProblems(List<ProblemType> facilityProblems);
-
-    //////////////
-    IFacility getIFacility();
+    void setFacility(IFacility facility);
 
 }

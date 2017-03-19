@@ -137,10 +137,13 @@ public class Maintenance implements IMaintenance
         this.facilityProblems = facilityProblems;
     }
 
-    /////////////////////
-    public IFacility getIFacility()
-    {
-        return this.facility;
+    @Override
+    public IFacility getFacility() {
+        return facility;
     }
 
+    @Override
+    public void setFacility(IFacility facility) {
+        this.facility = facility;
+    }
 }

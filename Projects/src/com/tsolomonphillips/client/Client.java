@@ -27,6 +27,7 @@ public class Client {
         firstApartmentComplex.setBaseCapacity(0);
         firstApartmentComplex.setBaseRate(0);
         firstApartmentComplex.getAdministrator().setFacility(firstApartmentComplex);
+        firstApartmentComplex.getMaintenance().setFacility(firstApartmentComplex);
 
 
         //Instantiate the first building
@@ -36,6 +37,7 @@ public class Client {
         buildingOne.setBaseCapacity(0);
         buildingOne.setBaseRate(0);
         buildingOne.getAdministrator().setFacility(buildingOne);
+        buildingOne.getMaintenance().setFacility(buildingOne);
 
         //Instantiate two rooms
         IFacility roomOne = (IFacility) context.getBean("facility");
@@ -43,11 +45,16 @@ public class Client {
         roomOne.setFacilityType(FacilityType.ROOM);
         roomOne.setBaseCapacity(2);
         roomOne.setBaseRate(1200);
+        roomOne.getAdministrator().setFacility(roomOne);
+        roomOne.getMaintenance().setFacility(roomOne);
+
         IFacility roomTwo = (IFacility) context.getBean("facility");
         roomTwo.setName("Room Two");
         roomTwo.setFacilityType(FacilityType.ROOM);
         roomTwo.setBaseCapacity(1);
         roomTwo.setBaseRate(900);
+        roomTwo.getAdministrator().setFacility(roomTwo);
+        roomTwo.getMaintenance().setFacility(roomTwo);
 
         //add rooms to building, add building to complex
         buildingOne.addFacility(roomOne);
@@ -78,6 +85,8 @@ public class Client {
         roomThree.setFacilityType(FacilityType.ROOM);
         roomThree.setBaseCapacity(2);
         roomThree.setBaseRate(2000);
+        roomThree.getAdministrator().setFacility(roomThree);
+        roomThree.getMaintenance().setFacility(roomThree);
         buildingOne.addFacility(roomThree);
         System.out.println("Added "+ roomThree.getFacilityInformation().getName() + " to " + buildingOne.getName() + ".");
         System.out.println(firstApartmentComplex.getName() + " now has a capacity of " + firstApartmentComplex.getCapacity() + ".");
@@ -136,8 +145,8 @@ public class Client {
         fifthTenant.makeFacilityMaintenanceRequest(thirdMaintenanceRequest);
 
         IMaintenanceRequest fourthMaintenanceRequest = (IMaintenanceRequest) context.getBean("maintenanceRequest");
-        firstMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
-        firstMaintenanceRequest.setProblemType(ProblemType.HEATING);
+        fourthMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
+        fourthMaintenanceRequest.setProblemType(ProblemType.HEATING);
         secondTenant.makeFacilityMaintenanceRequest(fourthMaintenanceRequest);
 
         //maybe some print statements here
@@ -184,5 +193,25 @@ public class Client {
         Date fourthDate = (Date) context.getBean("date");
         roomOne.getMaintenance().scheduleMaintenance(fourthMaintenanceOrder, fourthDate);
         System.out.println("Schedule: " + roomOne.getMaintenance().getSchedule().getMap().size());
+
+        //maybe some print statements here
+
+        //do some maintenance
+        roomTwo.getMaintenance().doMaintenance(firstMaintenanceRequest);
+        roomOne.getMaintenance().doMaintenance(secondMaintenanceRequest);
+        roomThree.getMaintenance().doMaintenance(thirdMaintenanceRequest);
+        roomOne.getMaintenance().doMaintenance(fourthMaintenanceRequest);
+
+        //some more print statements
+
+        //this won't work, because there are currently tenants occupying room three
+        buildingOne.removeFacility(roomThree);
+        //so we vacate the facility
+        roomThree.vacateFacility();
+        System.out.println(roomThree.getName() + " has been vacated. The number of tenants in room Three is now: " + roomThree.getFacilityTenants().size());
+        buildingOne.removeFacility(roomThree);
+        System.out.println(roomThree.getName() + " has been removed from " + buildingOne.getName());
+
+
     }
 }

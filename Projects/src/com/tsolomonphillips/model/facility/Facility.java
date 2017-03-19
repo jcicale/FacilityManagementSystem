@@ -44,8 +44,18 @@ public class Facility implements IFacility, IFacilityDetail {
     }
 
     @Override
-    public void removeFacility(IFacility facility) {
-        subFacilities.remove(facility);
+    public void removeFacility(IFacility facility) throws IllegalStateException{
+        try {
+            if (facility.getFacilityTenants().size() == 0) {
+                subFacilities.remove(facility);
+            }
+            else {
+                throw new IllegalStateException();
+            }
+        }
+        catch (IllegalStateException exception) {
+            System.out.println(facility.getName() + " has tenants. The facility must be vacant before it can be removed.");
+        }
     }
 
     @Override
