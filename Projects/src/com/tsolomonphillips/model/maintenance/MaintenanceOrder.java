@@ -13,12 +13,12 @@ public class MaintenanceOrder implements IMaintenanceOrder
     private IMaintenanceRequest maintenanceRequest;
 
 
-    public MaintenanceOrder(MaintenanceRequest maintenanceRequest)
-    {
-        this.maintenanceRequest = maintenanceRequest;
-        this.dateSubmitted = maintenanceRequest.getDateRequested();
-        this.maintenanceCost = calculateMaintenanceCost();
-    }
+//    public MaintenanceOrder(MaintenanceRequest maintenanceRequest)
+//    {
+//        this.maintenanceRequest = maintenanceRequest;
+//        this.dateSubmitted = maintenanceRequest.getDateRequested();
+//        this.maintenanceCost = calculateMaintenanceCost();
+//    }
 
     public MaintenanceOrder() {
 

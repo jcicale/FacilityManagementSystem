@@ -11,17 +11,17 @@ public class MaintenanceLog implements IMaintenanceLog
     private List<IMaintenanceRequest> pendingMaintenance;
     private List<IMaintenanceRequest> completedMaintenance;
 
-    public MaintenanceLog()
-    {
-        pendingMaintenance = new ArrayList<>();
-        completedMaintenance = new ArrayList<>();
-    }
-
-
 //    public MaintenanceLog()
 //    {
-//
+//        pendingMaintenance = new ArrayList<>();
+//        completedMaintenance = new ArrayList<>();
 //    }
+
+
+    public MaintenanceLog()
+    {
+
+    }
 
     public void setPendingMaintenance(List<IMaintenanceRequest> pendingMaintenance)
     {

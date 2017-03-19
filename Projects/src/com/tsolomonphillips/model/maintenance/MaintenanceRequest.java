@@ -16,14 +16,14 @@ public class MaintenanceRequest implements IMaintenanceRequest
     private String idNumber;
     private IFacility facility;
 
-public MaintenanceRequest(ProblemType problemType, Date dateCreated, IFacility facility)
-    {
-        this.problemType = problemType;
-        this.dateCreated = dateCreated;
-        this.isCompleted = false;
-        this.idNumber = UUID.randomUUID().toString();
-        this.facility = facility;
-    }
+//public MaintenanceRequest(ProblemType problemType, Date dateCreated, IFacility facility)
+//    {
+//        this.problemType = problemType;
+//        this.dateCreated = dateCreated;
+//        this.isCompleted = false;
+//        this.idNumber = UUID.randomUUID().toString();
+//        this.facility = facility;
+//    }
 
    public MaintenanceRequest()
    {
@@ -54,7 +54,7 @@ public MaintenanceRequest(ProblemType problemType, Date dateCreated, IFacility f
     }
 
 
-    public void setCompleted(boolean completed)
+    public void setIsCompleted(boolean completed)
     {
         isCompleted = completed;
     }

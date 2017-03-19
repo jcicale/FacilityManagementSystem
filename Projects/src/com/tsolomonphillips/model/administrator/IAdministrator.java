@@ -14,6 +14,8 @@ public interface IAdministrator
     IFacility getFacility();
     void setInspectionList(List<IInspection> inspectionList);
     List<IInspection> getInspectionList();
+    void setAllInspections(List<IInspection> inspectionList);
+    List<IInspection> getAllInspections();
 
     List<IInspection> listInspections();
     void performInspection(IInspection inspection);

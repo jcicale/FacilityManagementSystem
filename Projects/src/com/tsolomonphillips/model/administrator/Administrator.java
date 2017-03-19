@@ -12,10 +12,11 @@ import java.util.UUID;
 public class Administrator implements IAdministrator {
     private IFacility facility;
     private List<IInspection> inspectionList;
+    private List<IInspection> allInspections;
 
-    public Administrator(IFacility facility) {
-        this.facility = facility;
-    }
+//    public Administrator(IFacility facility) {
+//        this.facility = facility;
+//    }
 
     public Administrator() {
 
@@ -41,15 +42,24 @@ public class Administrator implements IAdministrator {
         return inspectionList;
     }
 
-    //gotta figure this one out too
+    @Override
+    public void setAllInspections(List<IInspection> allInspections) {
+        this.allInspections = allInspections;
+    }
+
+    @Override
+    public List<IInspection> getAllInspections() {
+        return allInspections;
+    }
+
     @Override
     public List<IInspection> listInspections() {
-        List<IInspection> allInspections = new ArrayList<>();
-        allInspections.addAll(inspectionList);
+        List<IInspection> allInspectionsList = allInspections;
+        allInspectionsList.addAll(inspectionList);
         for (IFacility facility : facility.getSubFacilities()) {
-            allInspections.addAll(facility.getAdministrator().listInspections());
+            allInspectionsList.addAll(facility.getAdministrator().listInspections());
         }
-        return allInspections;
+        return allInspectionsList;
     }
 
     @Override

@@ -14,12 +14,14 @@ public class Maintenance implements IMaintenance
 
     private IFacility facility;
 
-    public Maintenance(IFacility facility)
-    {
-        this.facility = facility;
-        this.log = new MaintenanceLog();
-        this.schedule = new Schedule();
-    }
+    private List<ProblemType> facilityProblems;
+
+//    public Maintenance(IFacility facility)
+//    {
+//        this.facility = facility;
+//        this.log = new MaintenanceLog();
+//        this.schedule = new Schedule();
+//    }
 
     public Maintenance() {
 
@@ -38,11 +40,11 @@ public class Maintenance implements IMaintenance
     }
 
     //don't think we'll need this anymore
-    @Override
-    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request)
-    {
-        return new MaintenanceOrder(request);
-    }
+//    @Override
+//    public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request)
+//    {
+//        return new MaintenanceOrder(request);
+//    }
 
     @Override
     public void scheduleMaintenance(IMaintenanceOrder order, Date date) {
@@ -57,8 +59,8 @@ public class Maintenance implements IMaintenance
     }
 
     @Override
-    public void doMaintenance(MaintenanceRequest request) {
-        request.setCompleted(true);
+    public void doMaintenance(IMaintenanceRequest request) {
+        request.setIsCompleted(true);
         for (IMaintenanceRequest maintenanceRequest : log.getPendingMaintenance()) {
             if (maintenanceRequest.getIdNumber().equalsIgnoreCase(request.getIdNumber())) {
                 log.getPendingMaintenance().remove(maintenanceRequest);
@@ -80,7 +82,7 @@ public class Maintenance implements IMaintenance
 
     @Override
     public List<ProblemType> listFacilityProblems() {
-        List<ProblemType> problemList = new ArrayList<>();
+        List<ProblemType> problemList = facilityProblems;
         for (IMaintenanceRequest request : log.getCompletedMaintenance())
         {
             problemList.add(request.getProblemType());
@@ -123,6 +125,16 @@ public class Maintenance implements IMaintenance
     @Override
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    @Override
+    public List<ProblemType> getFacilityProblems() {
+        return facilityProblems;
+    }
+
+    @Override
+    public void setFacilityProblems(List<ProblemType> facilityProblems) {
+        this.facilityProblems = facilityProblems;
     }
 
     /////////////////////

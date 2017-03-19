@@ -14,8 +14,10 @@ public interface IMaintenanceRequest
     String getIdNumber();
     boolean getIsCompleted();
     IFacility getFacility();
+
     void setProblemType(ProblemType problemType);
     void setDateCreated(Date dateCreated);
     void setIdNumber(String idNumber);
     void setFacility(IFacility facility);
+    void setIsCompleted(boolean completed);
 }

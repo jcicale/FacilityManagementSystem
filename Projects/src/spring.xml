@@ -37,6 +37,11 @@
             <!--<ref bean="inspection"/>-->
             <!--</list>-->
         </property>
+        <property name="allInspections">
+            <list/>
+            <!--<ref bean="inspection"/>-->
+            <!--</list>-->
+        </property>
     </bean>
 
     <bean id="date" class="java.util.Date"/>
@@ -74,7 +79,7 @@
     </bean>
 
     <bean id="maintenanceRequest" class="com.tsolomonphillips.model.maintenance.MaintenanceRequest" scope="prototype">
-        <property name="completed" value="false"/>
+        <property name="isCompleted" value="false"/>
         <property name="dateCreated" >
             <bean class="java.util.Date" />
         </property>
@@ -83,6 +88,9 @@
     <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype">
         <property name="schedule" ref="schedule"/>
         <property name="log" ref="maintenanceLog"/>
+        <property name="facilityProblems">
+            <list/>
+        </property>
     </bean>
 
 

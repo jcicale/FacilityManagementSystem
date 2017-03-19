@@ -13,9 +13,9 @@ public interface IMaintenance
     List<IMaintenanceRequest> listMaintRequests();
     List<IMaintenanceRequest> listMaintenance();
 
-    MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request);
+//    MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request);
     void scheduleMaintenance(IMaintenanceOrder order, Date date);
-    void doMaintenance(MaintenanceRequest request);
+    void doMaintenance(IMaintenanceRequest request);
 
     double calcMaintCostForFacility(MaintenanceOrder order);
     int calcProblemRateForFacility();
@@ -24,8 +24,10 @@ public interface IMaintenance
 
     MaintenanceLog getLog();
     Schedule getSchedule();
+    List<ProblemType> getFacilityProblems();
     void setLog(MaintenanceLog log);
     void setSchedule(Schedule schedule);
+    void setFacilityProblems(List<ProblemType> facilityProblems);
 
     //////////////
     IFacility getIFacility();

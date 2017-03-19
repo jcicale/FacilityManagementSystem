@@ -14,10 +14,10 @@ public class Tenant implements ITenant {
     private String name;
     private IFacility facility;
 
-    public Tenant(String name) {
-        this.name = name;
-        facility = null;
-    }
+//    public Tenant(String name) {
+//        this.name = name;
+//        facility = null;
+//    }
 
     public Tenant() {
 

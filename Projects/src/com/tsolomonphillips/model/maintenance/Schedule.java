@@ -11,17 +11,17 @@ public class Schedule implements ISchedule
     private List<Date> scheduledDates;
     private Map<IMaintenanceOrder, Date> map;
 
-    public Schedule()
-     {
-        maintenanceOrders = new ArrayList<>();
-        scheduledDates = new ArrayList<>();
-        map = new HashMap<>();
-    }
-
 //    public Schedule()
-//    {
-//
+//     {
+//        maintenanceOrders = new ArrayList<>();
+//        scheduledDates = new ArrayList<>();
+//        map = new HashMap<>();
 //    }
+
+    public Schedule()
+    {
+
+    }
 
 
     public List<IMaintenanceOrder> getMaintenanceOrders()
