@@ -7,9 +7,9 @@ import java.util.*;
  */
 public class Schedule implements ISchedule
 {
-    private List<MaintenanceOrder> maintenanceOrders;
+    private List<IMaintenanceOrder> maintenanceOrders;
     private List<Date> scheduledDates;
-    private Map<MaintenanceOrder, Date> map;
+    private Map<IMaintenanceOrder, Date> map;
 
     public Schedule()
      {
@@ -24,7 +24,7 @@ public class Schedule implements ISchedule
 //    }
 
 
-    public List<MaintenanceOrder> getMaintenanceOrders()
+    public List<IMaintenanceOrder> getMaintenanceOrders()
     {
         return maintenanceOrders;
     }
@@ -34,12 +34,12 @@ public class Schedule implements ISchedule
         return scheduledDates;
     }
 
-    public Map<MaintenanceOrder, Date> getMap()
+    public Map<IMaintenanceOrder, Date> getMap()
     {
         return map;
     }
 
-    public void setMaintenanceOrders(List<MaintenanceOrder> maintenanceOrders)
+    public void setMaintenanceOrders(List<IMaintenanceOrder> maintenanceOrders)
     {
         this.maintenanceOrders = maintenanceOrders;
     }
@@ -49,7 +49,7 @@ public class Schedule implements ISchedule
         this.scheduledDates = scheduledDates;
     }
 
-    public void setMap(Map<MaintenanceOrder, Date> map)
+    public void setMap(Map<IMaintenanceOrder, Date> map)
     {
         this.map = map;
     }

@@ -2,6 +2,7 @@ package com.tsolomonphillips.model.maintenance;
 
 import com.tsolomonphillips.model.facility.IFacility;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public interface IMaintenance
     List<IMaintenanceRequest> listMaintenance();
 
     MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request);
-    void scheduleMaintenance(MaintenanceOrder order);
+    void scheduleMaintenance(IMaintenanceOrder order, Date date);
     void doMaintenance(MaintenanceRequest request);
 
     double calcMaintCostForFacility(MaintenanceOrder order);

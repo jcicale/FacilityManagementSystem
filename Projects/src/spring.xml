@@ -39,16 +39,18 @@
         </property>
     </bean>
 
+    <bean id="date" class="java.util.Date"/>
+
     <bean id="schedule" class="com.tsolomonphillips.model.maintenance.Schedule" scope="prototype">
         <property name="maintenanceOrders">
-            <list>
-                <ref bean="maintenanceOrder"/>
-            </list>
+            <list/>
+                <!--<ref bean="maintenanceOrder"/>-->
+            <!--</list>-->
         </property>
         <property name="scheduledDates">
-            <list>
-                <bean class="java.util.Date" />
-            </list>
+            <list/>
+                <!--<bean class="java.util.Date" />-->
+            <!--</list>-->
         </property>
         <property name="map">
             <map/>

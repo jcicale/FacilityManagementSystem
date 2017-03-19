@@ -170,5 +170,19 @@ public class Client {
         //maybe some print statements here
 
         //use order and request to schedule maintenance
+        Date firstDate = (Date) context.getBean("date");
+        roomTwo.getMaintenance().scheduleMaintenance(firstMaintenanceOrder, firstDate);
+
+        System.out.println("Schedule " + roomOne.getMaintenance().getSchedule().getMap().size());
+        Date secondDate = (Date) context.getBean("date");
+        roomOne.getMaintenance().scheduleMaintenance(secondMaintenanceOrder, secondDate);
+        System.out.println("Schedule: " + roomOne.getMaintenance().getSchedule().getMap().size());
+
+        Date thirdDate = (Date) context.getBean("date");
+        roomThree.getMaintenance().scheduleMaintenance(thirdMaintenanceOrder, thirdDate);
+
+        Date fourthDate = (Date) context.getBean("date");
+        roomOne.getMaintenance().scheduleMaintenance(fourthMaintenanceOrder, fourthDate);
+        System.out.println("Schedule: " + roomOne.getMaintenance().getSchedule().getMap().size());
     }
 }

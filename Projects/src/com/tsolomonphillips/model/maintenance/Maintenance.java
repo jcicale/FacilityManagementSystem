@@ -37,6 +37,7 @@ public class Maintenance implements IMaintenance
         return this.log.getCompletedMaintenance();
     }
 
+    //don't think we'll need this anymore
     @Override
     public MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request)
     {
@@ -44,9 +45,9 @@ public class Maintenance implements IMaintenance
     }
 
     @Override
-    public void scheduleMaintenance(MaintenanceOrder order) {
+    public void scheduleMaintenance(IMaintenanceOrder order, Date date) {
         schedule.getMaintenanceOrders().add(order);
-        Date scheduledDate = new Date();
+        Date scheduledDate = date;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(scheduledDate);
         calendar.add(Calendar.DATE, 2);
@@ -95,7 +96,7 @@ public class Maintenance implements IMaintenance
     public int calcDownTimeForFacility()
     {
         int downtime = 0;
-        for (MaintenanceOrder order : schedule.getMaintenanceOrders())
+        for (IMaintenanceOrder order : schedule.getMaintenanceOrders())
         {
             downtime += order.calculateDowntime();
         }

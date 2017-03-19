@@ -9,10 +9,10 @@ import java.util.Map;
  */
 public interface ISchedule
 {
-    List<MaintenanceOrder> getMaintenanceOrders();
+    List<IMaintenanceOrder> getMaintenanceOrders();
     List<Date> getScheduledDates();
-    Map<MaintenanceOrder, Date> getMap();
-    void setMaintenanceOrders(List<MaintenanceOrder> maintenanceOrders);
+    Map<IMaintenanceOrder, Date> getMap();
+    void setMaintenanceOrders(List<IMaintenanceOrder> maintenanceOrders);
     void setScheduledDates(List<Date> scheduledDates);
-    void setMap(Map<MaintenanceOrder, Date> map);
+    void setMap(Map<IMaintenanceOrder, Date> map);
 }
