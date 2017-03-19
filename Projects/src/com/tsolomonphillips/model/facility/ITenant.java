@@ -1,5 +1,6 @@
 package com.tsolomonphillips.model.facility;
 
+import com.tsolomonphillips.model.maintenance.IMaintenanceRequest;
 import com.tsolomonphillips.model.maintenance.MaintenanceRequest;
 import com.tsolomonphillips.model.maintenance.ProblemType;
 
@@ -13,6 +14,6 @@ public interface ITenant
     void setName(String name);
     void setTenantFacility(IFacility facility);
     void removeTenantFromFacility();
-    MaintenanceRequest makeFacilityMaintenanceRequest(ProblemType problemType);
+    void makeFacilityMaintenanceRequest(IMaintenanceRequest maintenanceRequest);
 
 }

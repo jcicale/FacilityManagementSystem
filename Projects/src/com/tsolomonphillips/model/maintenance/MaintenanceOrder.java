@@ -10,53 +10,68 @@ public class MaintenanceOrder implements IMaintenanceOrder
     private Date dateSubmitted;
     private double maintenanceCost;
     private int downTime;
-    private MaintenanceRequest maintenanceRequest;
+    private IMaintenanceRequest maintenanceRequest;
 
 
     public MaintenanceOrder(MaintenanceRequest maintenanceRequest)
     {
         this.maintenanceRequest = maintenanceRequest;
         this.dateSubmitted = maintenanceRequest.getDateRequested();
-        this.maintenanceCost = getMaintenanceCost();
+        this.maintenanceCost = calculateMaintenanceCost();
     }
 
     public MaintenanceOrder() {
 
     }
 
-
+    @Override
     public Date getDateSubmitted()
     {
         return dateSubmitted;
     }
 
-    public MaintenanceRequest getMaintenanceRequest()
-    {
-        return maintenanceRequest;
-    }
-
+    @Override
     public void setDateSubmitted(Date dateSubmitted)
     {
         this.dateSubmitted = dateSubmitted;
     }
 
+    @Override
+    public IMaintenanceRequest getMaintenanceRequest()
+    {
+        return maintenanceRequest;
+    }
+
+    @Override
+    public void setMaintenanceRequest(IMaintenanceRequest maintenanceRequest) {
+        this.maintenanceRequest = maintenanceRequest;
+    }
+
+    @Override
+    public double getMaintenanceCost() {
+        return maintenanceCost;
+    }
+
+    @Override
     public void setMaintenanceCost(double maintenanceCost)
     {
         this.maintenanceCost = maintenanceCost;
     }
 
+    @Override
+    public int getDowntime() {
+        return downTime;
+    }
+
+    @Override
     public void setDownTime(int downTime)
     {
         this.downTime = downTime;
     }
 
-    public void setMaintenanceRequest(MaintenanceRequest maintenanceRequest)
-    {
-        this.maintenanceRequest = maintenanceRequest;
-    }
 
     @Override
-    public double getMaintenanceCost()
+    public double calculateMaintenanceCost()
     {
         ProblemType type = this.maintenanceRequest.getProblemType();
         if (type == ProblemType.ELECTRICAL)
@@ -79,7 +94,7 @@ public class MaintenanceOrder implements IMaintenanceOrder
     }
 
     @Override
-    public int getDowntime()
+    public int calculateDowntime()
     {
         ProblemType type = this.maintenanceRequest.getProblemType();
         if (type == ProblemType.ELECTRICAL)

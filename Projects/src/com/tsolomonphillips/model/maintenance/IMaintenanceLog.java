@@ -7,10 +7,10 @@ import java.util.List;
  */
 public interface IMaintenanceLog
 {
-    List<MaintenanceRequest> getPendingMaintenance();
-    List<MaintenanceRequest> getCompletedMaintenance();
-    void addToPendingMaintenance(MaintenanceRequest request);
-    void setPendingMaintenance(List<MaintenanceRequest> pendingMaintenance);
-    void setCompletedMaintenance(List<MaintenanceRequest> completedMaintenance);
+    List<IMaintenanceRequest> getPendingMaintenance();
+    List<IMaintenanceRequest> getCompletedMaintenance();
+    void addToPendingMaintenance(IMaintenanceRequest request);
+    void setPendingMaintenance(List<IMaintenanceRequest> pendingMaintenance);
+    void setCompletedMaintenance(List<IMaintenanceRequest> completedMaintenance);
 
 }

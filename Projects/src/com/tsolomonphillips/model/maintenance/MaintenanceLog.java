@@ -8,8 +8,8 @@ import java.util.ArrayList;
  */
 public class MaintenanceLog implements IMaintenanceLog
 {
-    private List<MaintenanceRequest> pendingMaintenance;
-    private List<MaintenanceRequest> completedMaintenance;
+    private List<IMaintenanceRequest> pendingMaintenance;
+    private List<IMaintenanceRequest> completedMaintenance;
 
     public MaintenanceLog()
     {
@@ -23,30 +23,30 @@ public class MaintenanceLog implements IMaintenanceLog
 //
 //    }
 
-    public void setPendingMaintenance(List<MaintenanceRequest> pendingMaintenance)
+    public void setPendingMaintenance(List<IMaintenanceRequest> pendingMaintenance)
     {
         this.pendingMaintenance = pendingMaintenance;
     }
 
-    public void setCompletedMaintenance(List<MaintenanceRequest> completedMaintenance)
+    public void setCompletedMaintenance(List<IMaintenanceRequest> completedMaintenance)
     {
         this.completedMaintenance = completedMaintenance;
     }
 
     @Override
-    public List<MaintenanceRequest> getPendingMaintenance()
+    public List<IMaintenanceRequest> getPendingMaintenance()
     {
         return pendingMaintenance;
     }
 
    @Override
-    public List<MaintenanceRequest> getCompletedMaintenance()
+    public List<IMaintenanceRequest> getCompletedMaintenance()
     {
         return completedMaintenance;
     }
 
     @Override
-    public void addToPendingMaintenance(MaintenanceRequest request)
+    public void addToPendingMaintenance(IMaintenanceRequest request)
     {
         pendingMaintenance.add(request);
     }

@@ -10,10 +10,12 @@ public interface IMaintenanceOrder
     double getMaintenanceCost();
     int getDowntime();
     Date getDateSubmitted();
-    MaintenanceRequest getMaintenanceRequest();
+    IMaintenanceRequest getMaintenanceRequest();
     void setDateSubmitted(Date dateSubmitted);
     void setMaintenanceCost(double maintenanceCost);
     void setDownTime(int downTime);
-    void setMaintenanceRequest(MaintenanceRequest maintenanceRequest);
+    void setMaintenanceRequest(IMaintenanceRequest maintenanceRequest);
 
+    double calculateMaintenanceCost();
+    int calculateDowntime();
 }

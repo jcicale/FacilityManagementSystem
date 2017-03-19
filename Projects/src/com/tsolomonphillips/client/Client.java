@@ -6,7 +6,7 @@ import com.tsolomonphillips.model.facility.Facility;
 import com.tsolomonphillips.model.facility.FacilityType;
 import com.tsolomonphillips.model.facility.IFacility;
 import com.tsolomonphillips.model.facility.ITenant;
-import com.tsolomonphillips.model.maintenance.Maintenance;
+import com.tsolomonphillips.model.maintenance.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -102,8 +102,9 @@ public class Client {
         fifthTenant.setName("Ron Swanson");
         roomThree.addTenant(fifthTenant);
 
+        //maybe some print statements here
 
-        //perform some inspections
+        //instantiate and perform some inspections
         IInspection firstInspection = (IInspection) context.getBean("inspection");
         firstInspection.setID(UUID.randomUUID().toString());
         firstApartmentComplex.getAdministrator().performInspection(firstInspection);
@@ -116,8 +117,58 @@ public class Client {
         thirdInspection.setID(UUID.randomUUID().toString());
         buildingOne.getAdministrator().performInspection(thirdInspection);
 
-        //perform some maintenance requests
-        
+        //maybe some print statements here
 
+        //instantiate and submit some maintenance requests
+        IMaintenanceRequest firstMaintenanceRequest = (IMaintenanceRequest) context.getBean("maintenanceRequest");
+        firstMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
+        firstMaintenanceRequest.setProblemType(ProblemType.ELECTRICAL);
+        thirdTenant.makeFacilityMaintenanceRequest(firstMaintenanceRequest);
+
+        IMaintenanceRequest secondMaintenanceRequest = (IMaintenanceRequest) context.getBean("maintenanceRequest");
+        secondMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
+        secondMaintenanceRequest.setProblemType(ProblemType.PLUMBING);
+        firstTenant.makeFacilityMaintenanceRequest(secondMaintenanceRequest);
+
+        IMaintenanceRequest thirdMaintenanceRequest = (IMaintenanceRequest) context.getBean("maintenanceRequest");
+        thirdMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
+        thirdMaintenanceRequest.setProblemType(ProblemType.COOLING);
+        fifthTenant.makeFacilityMaintenanceRequest(thirdMaintenanceRequest);
+
+        IMaintenanceRequest fourthMaintenanceRequest = (IMaintenanceRequest) context.getBean("maintenanceRequest");
+        firstMaintenanceRequest.setIdNumber(UUID.randomUUID().toString());
+        firstMaintenanceRequest.setProblemType(ProblemType.HEATING);
+        secondTenant.makeFacilityMaintenanceRequest(fourthMaintenanceRequest);
+
+        //maybe some print statements here
+
+        //use those maintenance requests to populate some maintenance orders
+        IMaintenanceOrder firstMaintenanceOrder = (IMaintenanceOrder) context.getBean("maintenanceOrder");
+        firstMaintenanceOrder.setMaintenanceRequest(firstMaintenanceRequest);
+        firstMaintenanceOrder.setDateSubmitted(firstMaintenanceOrder.getMaintenanceRequest().getDateRequested());
+        firstMaintenanceOrder.setDownTime(firstMaintenanceOrder.calculateDowntime());
+        firstMaintenanceOrder.setMaintenanceCost(firstMaintenanceOrder.calculateMaintenanceCost());
+
+        IMaintenanceOrder secondMaintenanceOrder = (IMaintenanceOrder) context.getBean("maintenanceOrder");
+        secondMaintenanceOrder.setMaintenanceRequest(secondMaintenanceRequest);
+        secondMaintenanceOrder.setDateSubmitted(secondMaintenanceOrder.getMaintenanceRequest().getDateRequested());
+        secondMaintenanceOrder.setDownTime(secondMaintenanceOrder.calculateDowntime());
+        secondMaintenanceOrder.setMaintenanceCost(secondMaintenanceOrder.calculateMaintenanceCost());
+
+        IMaintenanceOrder thirdMaintenanceOrder = (IMaintenanceOrder) context.getBean("maintenanceOrder");
+        thirdMaintenanceOrder.setMaintenanceRequest(thirdMaintenanceRequest);
+        thirdMaintenanceOrder.setDateSubmitted(thirdMaintenanceOrder.getMaintenanceRequest().getDateRequested());
+        thirdMaintenanceOrder.setDownTime(thirdMaintenanceOrder.calculateDowntime());
+        thirdMaintenanceOrder.setMaintenanceCost(thirdMaintenanceOrder.calculateMaintenanceCost());
+
+        IMaintenanceOrder fourthMaintenanceOrder = (IMaintenanceOrder) context.getBean("maintenanceOrder");
+        fourthMaintenanceOrder.setMaintenanceRequest(fourthMaintenanceRequest);
+        fourthMaintenanceOrder.setDateSubmitted(fourthMaintenanceOrder.getMaintenanceRequest().getDateRequested());
+        fourthMaintenanceOrder.setDownTime(fourthMaintenanceOrder.calculateDowntime());
+        fourthMaintenanceOrder.setMaintenanceCost(fourthMaintenanceOrder.calculateMaintenanceCost());
+
+        //maybe some print statements here
+
+        //use order and request to schedule maintenance
     }
 }

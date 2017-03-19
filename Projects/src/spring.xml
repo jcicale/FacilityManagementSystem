@@ -56,9 +56,7 @@
         </property>
     </bean>
 
-    <bean id="maintenanceOrder" class="com.tsolomonphillips.model.maintenance.MaintenanceOrder" scope="prototype">
-        <!--not done yet!-->
-    </bean>
+    <bean id="maintenanceOrder" class="com.tsolomonphillips.model.maintenance.MaintenanceOrder" scope="prototype"/>
 
     <bean id="maintenanceLog" class="com.tsolomonphillips.model.maintenance.MaintenanceLog" scope="prototype">
         <property name="completedMaintenance">

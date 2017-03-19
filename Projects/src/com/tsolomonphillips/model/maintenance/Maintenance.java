@@ -26,13 +26,13 @@ public class Maintenance implements IMaintenance
     }
 
     @Override
-    public List<MaintenanceRequest> listMaintRequests()
+    public List<IMaintenanceRequest> listMaintRequests()
     {
         return this.log.getPendingMaintenance();
     }
 
     @Override
-    public List<MaintenanceRequest> listMaintenance()
+    public List<IMaintenanceRequest> listMaintenance()
     {
         return this.log.getCompletedMaintenance();
     }
@@ -58,7 +58,7 @@ public class Maintenance implements IMaintenance
     @Override
     public void doMaintenance(MaintenanceRequest request) {
         request.setCompleted(true);
-        for (MaintenanceRequest maintenanceRequest : log.getPendingMaintenance()) {
+        for (IMaintenanceRequest maintenanceRequest : log.getPendingMaintenance()) {
             if (maintenanceRequest.getIdNumber().equalsIgnoreCase(request.getIdNumber())) {
                 log.getPendingMaintenance().remove(maintenanceRequest);
                 break;
@@ -69,7 +69,7 @@ public class Maintenance implements IMaintenance
 
     @Override
     public double calcMaintCostForFacility(MaintenanceOrder order) {
-        return order.getMaintenanceCost();
+        return order.calculateMaintenanceCost();
     }
 
     @Override
@@ -80,11 +80,11 @@ public class Maintenance implements IMaintenance
     @Override
     public List<ProblemType> listFacilityProblems() {
         List<ProblemType> problemList = new ArrayList<>();
-        for (MaintenanceRequest request : log.getCompletedMaintenance())
+        for (IMaintenanceRequest request : log.getCompletedMaintenance())
         {
             problemList.add(request.getProblemType());
         }
-        for (MaintenanceRequest request : log.getPendingMaintenance())
+        for (IMaintenanceRequest request : log.getPendingMaintenance())
         {
             problemList.add(request.getProblemType());
         }
@@ -97,7 +97,7 @@ public class Maintenance implements IMaintenance
         int downtime = 0;
         for (MaintenanceOrder order : schedule.getMaintenanceOrders())
         {
-            downtime += order.getDowntime();
+            downtime += order.calculateDowntime();
         }
         return downtime;
     }

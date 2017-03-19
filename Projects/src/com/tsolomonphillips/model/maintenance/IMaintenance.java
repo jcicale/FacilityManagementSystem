@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface IMaintenance
 {
-    List<MaintenanceRequest> listMaintRequests();
-    List<MaintenanceRequest> listMaintenance();
+    List<IMaintenanceRequest> listMaintRequests();
+    List<IMaintenanceRequest> listMaintenance();
 
     MaintenanceOrder createMaintenanceOrder(MaintenanceRequest request);
     void scheduleMaintenance(MaintenanceOrder order);

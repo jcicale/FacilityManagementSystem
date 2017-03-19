@@ -54,26 +54,25 @@ public class Administrator implements IAdministrator {
 
     @Override
     public void performInspection(IInspection inspection) {
+        //when an administrator performs an inspection, it will be set for his/her facility, rather than doing this in client
         inspection.setFacility(this.getFacility());
         inspectionList.add(inspection);
     }
 
     @Override
     public float getOccupiedPercentage() {
-//        if (facility.getFacilityInformation().getCapacity() == 0) return 1;
-//        return (float)facility.getTenants().size()/(float)facility.getFacilityInformation().getCapacity();
-        return 0;
+        if (facility.getFacilityInformation().getCapacity() == 0) return 1;
+        return (float)facility.listActualUsage().size()/(float)facility.getFacilityInformation().getCapacity();
     }
 
     @Override
     public int getAvailableCapacity() {
-//        return facility.getFacilityInformation().getCapacity() - facility.getTenants().size();
-        return 0;
+        return facility.getFacilityInformation().getCapacity() - facility.listActualUsage().size();
     }
 
     @Override
     public int getNumberOfTenants() {
-//        return facility.getTenants().size();
-        return 0;
+        return facility.listActualUsage().size();
     }
+
 }
