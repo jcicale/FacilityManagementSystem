@@ -14,6 +14,7 @@ public class Facility implements IFacility, IFacilityDetail {
     private List<ITenant> allTenants;
     private IAdministrator administrator;
     private IMaintenance maintenance;
+
     private String name;
     private FacilityType type;
     private int baseCapacity;
@@ -83,8 +84,6 @@ public class Facility implements IFacility, IFacilityDetail {
         tenant.removeTenantFromFacility();
     }
 
-    //***********************************************
-    //old implementation of getFacilityTenants - need to figure out how the new one will still do this.
     @Override
     public List<ITenant> listActualUsage() {
         List<ITenant> allTenantList = allTenants;

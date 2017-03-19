@@ -28,6 +28,7 @@ public class Client {
         firstApartmentComplex.setBaseRate(0);
         firstApartmentComplex.getAdministrator().setFacility(firstApartmentComplex);
 
+
         //Instantiate the first building
         IFacility buildingOne = (IFacility) context.getBean("facility");
         buildingOne.setName("Building One");
@@ -104,13 +105,19 @@ public class Client {
 
         //perform some inspections
         IInspection firstInspection = (IInspection) context.getBean("inspection");
-        Date currentDate = (Date) context.getBean("currentDate");
-        firstInspection.setDate(currentDate);
         firstInspection.setID(UUID.randomUUID().toString());
         firstApartmentComplex.getAdministrator().performInspection(firstInspection);
 
+        IInspection secondInspection = (IInspection) context.getBean("inspection");
+        secondInspection.setID(UUID.randomUUID().toString());
+        buildingOne.getAdministrator().performInspection(secondInspection);
 
+        IInspection thirdInspection = (IInspection) context.getBean("inspection");
+        thirdInspection.setID(UUID.randomUUID().toString());
+        buildingOne.getAdministrator().performInspection(thirdInspection);
 
+        //perform some maintenance requests
+        
 
     }
 }

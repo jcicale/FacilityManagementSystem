@@ -47,7 +47,7 @@
         </property>
         <property name="scheduledDates">
             <list>
-                <ref bean="currentDate"/>
+                <bean class="java.util.Date" />
             </list>
         </property>
         <property name="map">
@@ -74,8 +74,10 @@
     </bean>
 
     <bean id="maintenanceRequest" class="com.tsolomonphillips.model.maintenance.MaintenanceRequest" scope="prototype">
-        <!--<property name="completed" value="false"/>-->
-        <!--<property name="dateCreated" ref="currentDate"/>-->
+        <property name="completed" value="false"/>
+        <property name="dateCreated" >
+            <bean class="java.util.Date" />
+        </property>
     </bean>
 
     <bean id="maintenance" class="com.tsolomonphillips.model.maintenance.Maintenance" scope="prototype">
@@ -83,21 +85,12 @@
         <property name="log" ref="maintenanceLog"/>
     </bean>
 
-    <!--Beans for current date-->
-    <bean id="dateFormat" class="java.text.SimpleDateFormat">
-        <constructor-arg value="yyyy/MM/dd" />
-    </bean>
 
-
-    <bean id="currentDate" class="java.util.Date" factory-bean="dateFormat" factory-method="format">
-        <constructor-arg>
-            <bean class="java.util.Date"/>
-        </constructor-arg>
-    </bean>
 
     <bean id="inspection" class="com.tsolomonphillips.model.administrator.Inspection" scope="prototype">
-        <!--<property name="date" ref="currentDate"/>-->
-        <property name="facility" ref="facility"/>
+        <property name="date" >
+            <bean class="java.util.Date" />
+        </property>
         <property name="ID" value=""/>
     </bean>
 

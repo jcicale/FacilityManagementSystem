@@ -54,6 +54,7 @@ public class Administrator implements IAdministrator {
 
     @Override
     public void performInspection(IInspection inspection) {
+        inspection.setFacility(this.getFacility());
         inspectionList.add(inspection);
     }
 
